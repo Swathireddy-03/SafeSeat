@@ -1,0 +1,410 @@
+* {
+  box-sizing: border-box;
+}
+
+.login-selection-page {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(146, 57, 232, 0.16),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 5% 90%,
+      rgba(240, 68, 156, 0.13),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #faf8fd 0%,
+      #f7f0ff 50%,
+      #eee4ff 100%
+    );
+  color: #321060;
+}
+
+.selection-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.circle-one {
+  width: 400px;
+  height: 400px;
+  right: -170px;
+  top: -170px;
+  background: rgba(146, 57, 232, 0.08);
+}
+
+.circle-two {
+  width: 300px;
+  height: 300px;
+  left: -150px;
+  bottom: -150px;
+  background: rgba(240, 68, 156, 0.07);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.selection-header {
+  width: min(1180px, 92%);
+  margin: 0 auto;
+  padding-top: 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.selection-logo {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: #321060;
+}
+
+.selection-logo span {
+  color: #9239e8;
+}
+
+.selection-header p {
+  margin: 3px 0 0;
+  color: #817987;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.selection-content {
+  width: min(1050px, 92%);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  padding: 55px 0 30px;
+}
+
+.selection-heading {
+  text-align: center;
+}
+
+.selection-heading > span {
+  color: #9239e8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.selection-heading h1 {
+  margin: 13px 0 12px;
+  font-size: clamp(40px, 5vw, 62px);
+  line-height: 1.05;
+  letter-spacing: -3px;
+  color: #321060;
+}
+
+.selection-heading h1 strong {
+  background: linear-gradient(
+    90deg,
+    #9239e8,
+    #f0449c
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.selection-heading p {
+  margin: 0;
+  color: #777080;
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   LOGIN OPTIONS
+===================================================== */
+
+.login-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  max-width: 900px;
+  margin: 48px auto 0;
+}
+
+.login-card {
+  min-height: 370px;
+  padding: 30px;
+  border-radius: 25px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 18px 50px rgba(50, 16, 96, 0.09);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.login-card::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  right: -70px;
+  top: -70px;
+  opacity: 0.6;
+  transition: 0.4s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 25px 65px rgba(50, 16, 96, 0.16);
+}
+
+.login-card:hover::before {
+  transform: scale(1.25);
+}
+
+
+/* Passenger card */
+
+.passenger-card {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.passenger-card::before {
+  background: rgba(146, 57, 232, 0.10);
+}
+
+
+/* Admin card */
+
+.admin-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(248, 239, 255, 0.94)
+    );
+}
+
+.admin-card::before {
+  background: rgba(240, 68, 156, 0.11);
+}
+
+
+/* =====================================================
+   CARD TOP
+===================================================== */
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+.passenger-icon {
+  background: #f0e6ff;
+}
+
+.admin-icon {
+  background: #ffe7f1;
+}
+
+.card-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.75);
+  color: #6b21c9;
+  font-size: 20px;
+  transition: 0.3s ease;
+}
+
+.login-card:hover .card-arrow {
+  transform: translateX(5px);
+}
+
+
+/* =====================================================
+   CARD TEXT
+===================================================== */
+
+.card-text {
+  margin-top: 42px;
+}
+
+.card-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.6px;
+  color: #978e9d;
+}
+
+.card-text h2 {
+  margin: 8px 0 10px;
+  font-size: 32px;
+  letter-spacing: -1px;
+  color: #321060;
+}
+
+.card-text p {
+  max-width: 350px;
+  margin: 0;
+  color: #756d7c;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.login-card button {
+  position: absolute;
+  left: 30px;
+  bottom: 30px;
+  border: none;
+  border-radius: 13px;
+  padding: 13px 17px;
+  background: #321060;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: 0.3s ease;
+}
+
+.passenger-card button {
+  background: linear-gradient(
+    135deg,
+    #6b21c9,
+    #9239e8
+  );
+}
+
+.admin-card button {
+  background: linear-gradient(
+    135deg,
+    #9239e8,
+    #f0449c
+  );
+}
+
+.login-card button span {
+  font-size: 17px;
+  transition: 0.3s ease;
+}
+
+.login-card button:hover {
+  transform: translateY(-2px);
+}
+
+.login-card button:hover span {
+  transform: translateX(4px);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.selection-footer {
+  text-align: center;
+  color: #aaa1af;
+  font-size: 11px;
+  margin-top: 38px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 750px) {
+  .selection-content {
+    padding-top: 40px;
+  }
+
+  .selection-heading h1 {
+    font-size: 42px;
+    letter-spacing: -2px;
+  }
+
+  .login-options {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-top: 35px;
+  }
+
+  .login-card {
+    min-height: 330px;
+  }
+}
+
+@media (max-width: 480px) {
+  .selection-header {
+    padding-top: 24px;
+  }
+
+  .selection-logo {
+    font-size: 26px;
+  }
+
+  .selection-heading h1 {
+    font-size: 36px;
+  }
+
+  .selection-heading p {
+    font-size: 13px;
+  }
+
+  .login-card {
+    padding: 23px;
+    min-height: 315px;
+  }
+
+  .card-text {
+    margin-top: 30px;
+  }
+
+  .card-text h2 {
+    font-size: 27px;
+  }
+
+  .login-card button {
+    left: 23px;
+    bottom: 23px;
+  }
+}

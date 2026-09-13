@@ -1,0 +1,1657 @@
+/* =========================================
+   SAFESEAT ADMIN DASHBOARD
+========================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+.admin-layout {
+  min-height: 100vh;
+  background: #faf8fd;
+  color: #24182f;
+  font-family: "DM Sans", sans-serif;
+}
+
+
+/* =========================================
+   TOPBAR
+========================================= */
+
+.admin-topbar {
+  height: 82px;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #eee7f2;
+
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  box-shadow: 0 3px 15px rgba(50, 16, 96, 0.05);
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 205px;
+}
+
+.admin-brand-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+
+  background: linear-gradient(
+    135deg,
+    #6b21c9,
+    #9239e8,
+    #f0449c
+  );
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  box-shadow: 0 8px 20px rgba(146, 57, 232, 0.25);
+}
+
+.admin-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.admin-brand-text h2 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 800;
+  color: #321060;
+  letter-spacing: -0.4px;
+}
+
+.admin-brand-text span {
+  font-size: 11px;
+  color: #8d8198;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   TOP NAVIGATION
+========================================= */
+
+.admin-top-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 28px;
+}
+
+.admin-top-nav button {
+  border: none;
+  background: transparent;
+
+  height: 48px;
+  padding: 0 15px;
+
+  border-radius: 11px;
+
+  color: #6e6278;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.admin-top-nav button span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+}
+
+.admin-top-nav button:hover {
+  background: #f6effb;
+  color: #6b21c9;
+  transform: translateY(-1px);
+}
+
+.admin-top-nav button.active {
+  background: #f1e6fa;
+  color: #6b21c9;
+  font-weight: 700;
+}
+
+.admin-top-nav button.active span {
+  color: #9239e8;
+}
+
+
+/* =========================================
+   RIGHT SIDE TOPBAR
+========================================= */
+
+.admin-top-actions {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.admin-notification {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid #eee7f2;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  color: #62556d;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 17px;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.admin-notification:hover {
+  color: #6b21c9;
+  background: #f8f1fc;
+  border-color: #dfc9ee;
+}
+
+.admin-notification span {
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #f0449c;
+
+  top: 8px;
+  right: 8px;
+
+  border: 2px solid white;
+}
+
+
+/* =========================================
+   ADMIN PROFILE
+========================================= */
+
+.header-admin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-avatar {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    135deg,
+    #6b21c9,
+    #f0449c
+  );
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.header-admin > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.header-admin strong {
+  font-size: 14px;
+  color: #321060;
+}
+
+.header-admin small {
+  font-size: 11px;
+  color: #918698;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+.topbar-logout {
+  border: none;
+
+  background: #321060;
+  color: white;
+
+  padding: 11px 18px;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.topbar-logout:hover {
+  background: #6b21c9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(107, 33, 201, 0.2);
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.admin-main {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  padding: 38px 42px 60px;
+}
+
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.admin-header {
+  margin-bottom: 30px;
+}
+
+.admin-header h1 {
+  margin: 0 0 7px;
+
+  font-size: 31px;
+  line-height: 1.2;
+
+  color: #321060;
+
+  font-weight: 800;
+  letter-spacing: -0.7px;
+}
+
+.admin-header p {
+  margin: 0;
+
+  color: #82758c;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   STAT CARDS
+========================================= */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  min-height: 138px;
+
+  background: white;
+
+  border: 1px solid #eee7f2;
+
+  border-radius: 17px;
+
+  padding: 22px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  box-shadow:
+    0 5px 18px rgba(50, 16, 96, 0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(50, 16, 96, 0.08);
+}
+
+
+/* =========================================
+   STAT ICONS
+========================================= */
+
+.stat-icon {
+  min-width: 55px;
+  width: 55px;
+  height: 55px;
+
+  border-radius: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 23px;
+}
+
+.bus-icon {
+  background: #f1e8fb;
+  color: #6b21c9;
+}
+
+.train-icon {
+  background: #fce9f3;
+  color: #d63384;
+}
+
+.booking-icon {
+  background: #eaf0ff;
+  color: #3f7cff;
+}
+
+.seat-icon {
+  background: #eeeafa;
+  color: #7650a8;
+}
+
+.revenue-icon {
+  background: #e9f8f1;
+  color: #159a65;
+}
+
+.stat-card > div:last-child {
+  min-width: 0;
+}
+
+.stat-card span {
+  display: block;
+
+  color: #81748c;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  margin-bottom: 4px;
+}
+
+.stat-card h2 {
+  margin: 0;
+
+  color: #321060;
+
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.stat-card small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #a095a9;
+
+  font-size: 10px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   DASHBOARD ROW
+========================================= */
+
+.dashboard-row {
+  display: grid;
+
+  grid-template-columns: 1.55fr 0.85fr;
+
+  gap: 22px;
+
+  margin-bottom: 24px;
+}
+
+
+/* =========================================
+   COMMON PANEL
+========================================= */
+
+.dashboard-panel {
+  background: white;
+
+  border: 1px solid #eee7f2;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 5px 18px rgba(50, 16, 96, 0.04);
+}
+
+.quick-panel {
+  padding: 25px;
+}
+
+.occupancy-panel {
+  padding: 25px;
+}
+
+.recent-panel {
+  padding: 25px;
+}
+
+.booking-table-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+
+/* =========================================
+   PANEL HEADING
+========================================= */
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 22px;
+}
+
+.panel-heading h2 {
+  margin: 0 0 5px;
+
+  font-size: 19px;
+  font-weight: 800;
+
+  color: #321060;
+}
+
+.panel-heading p {
+  margin: 0;
+
+  color: #94889d;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   QUICK ACTIONS
+========================================= */
+
+.quick-actions {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 12px;
+}
+
+.quick-actions button {
+  border: 1px solid #eee7f2;
+
+  background: #ffffff;
+
+  border-radius: 13px;
+
+  padding: 15px;
+
+  text-align: left;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition: all 0.25s ease;
+}
+
+.quick-actions button:hover {
+  border-color: #d9bbed;
+
+  background: #fcf8ff;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 18px rgba(107, 33, 201, 0.07);
+}
+
+.quick-actions button > span {
+  min-width: 43px;
+  width: 43px;
+  height: 43px;
+
+  border-radius: 12px;
+
+  background: #f3eafa;
+
+  color: #7b2fc9;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 18px;
+}
+
+.quick-actions button:nth-child(2) > span {
+  background: #fcebf4;
+  color: #d63384;
+}
+
+.quick-actions button:nth-child(3) > span {
+  background: #edf2ff;
+  color: #3f7cff;
+}
+
+.quick-actions button:nth-child(4) > span {
+  background: #eeeafa;
+  color: #7650a8;
+}
+
+.quick-actions button div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.quick-actions strong {
+  color: #3b2b47;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.quick-actions small {
+  color: #9a8fa1;
+
+  font-size: 10px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   OCCUPANCY
+========================================= */
+
+.occupancy-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.occupancy-panel .panel-heading {
+  width: 100%;
+}
+
+.occupancy-circle {
+  width: 175px;
+  height: 175px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 2px auto 20px;
+}
+
+.circle-inner {
+  width: 130px;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    inset 0 0 0 1px #f2edf5;
+}
+
+.circle-inner strong {
+  color: #321060;
+
+  font-size: 29px;
+  font-weight: 800;
+}
+
+.circle-inner span {
+  color: #968a9f;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  margin-top: 2px;
+}
+
+.occupancy-info {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+
+  gap: 30px;
+}
+
+.occupancy-info > div {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #81758a;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.occupancy-info strong {
+  margin-left: 2px;
+
+  color: #321060;
+
+  font-size: 13px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  display: inline-block;
+}
+
+.booked-dot {
+  background: #9239e8;
+}
+
+.available-dot {
+  background: #d9d0df;
+}
+
+
+/* =========================================
+   RECENT BOOKINGS
+========================================= */
+
+.view-all-button {
+  border: none;
+
+  background: transparent;
+
+  color: #6b21c9;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  padding: 7px 10px;
+
+  border-radius: 8px;
+
+  transition: all 0.2s ease;
+}
+
+.view-all-button:hover {
+  background: #f5edfb;
+}
+
+
+/* =========================================
+   TABLE
+========================================= */
+
+.table-container {
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+.table-container table {
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 850px;
+}
+
+.table-container th {
+  background: #faf7fc;
+
+  color: #74677d;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  text-align: left;
+
+  padding: 14px 15px;
+
+  border-bottom: 1px solid #eee7f2;
+
+  white-space: nowrap;
+}
+
+.table-container td {
+  padding: 15px;
+
+  color: #65596d;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  border-bottom: 1px solid #f1edf3;
+
+  white-space: nowrap;
+}
+
+.table-container tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table-container tbody tr {
+  transition: background 0.2s ease;
+}
+
+.table-container tbody tr:hover {
+  background: #fcf9fe;
+}
+
+.booking-id {
+  color: #6b21c9;
+
+  font-weight: 700;
+}
+
+.type-bus,
+.type-train {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 5px 9px;
+
+  border-radius: 7px;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.type-bus {
+  background: #f1e8fb;
+  color: #6b21c9;
+}
+
+.type-train {
+  background: #fce9f3;
+  color: #d63384;
+}
+
+.status-confirmed {
+  color: #159a65;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   MANAGEMENT SECTION
+========================================= */
+
+.management-section {
+  width: 100%;
+}
+
+.management-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 24px;
+}
+
+.management-top h2 {
+  margin: 0 0 5px;
+
+  color: #321060;
+
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.management-top p {
+  margin: 0;
+
+  color: #94889d;
+
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   PRIMARY BUTTON
+========================================= */
+
+.primary-admin-button {
+  border: none;
+
+  background: linear-gradient(
+    135deg,
+    #6b21c9,
+    #9239e8
+  );
+
+  color: white;
+
+  padding: 12px 18px;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 17px rgba(107, 33, 201, 0.18);
+
+  transition: all 0.25s ease;
+}
+
+.primary-admin-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 22px rgba(107, 33, 201, 0.25);
+}
+
+
+/* =========================================
+   MANAGEMENT GRID
+========================================= */
+
+.management-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+
+/* =========================================
+   VEHICLE CARD
+========================================= */
+
+.vehicle-card {
+  background: white;
+
+  border: 1px solid #eee7f2;
+
+  border-radius: 18px;
+
+  padding: 22px;
+
+  box-shadow:
+    0 5px 18px rgba(50, 16, 96, 0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(50, 16, 96, 0.08);
+}
+
+.vehicle-card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 17px;
+}
+
+
+/* =========================================
+   VEHICLE ICON
+========================================= */
+
+.vehicle-icon {
+  width: 49px;
+  height: 49px;
+
+  border-radius: 13px;
+
+  background: #f1e8fb;
+
+  color: #6b21c9;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+}
+
+.vehicle-icon.train {
+  background: #fce9f3;
+  color: #d63384;
+}
+
+
+/* =========================================
+   ACTIVE BADGE
+========================================= */
+
+.active-badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 9px;
+
+  border-radius: 7px;
+
+  background: #eaf8f1;
+
+  color: #159a65;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.vehicle-card h3 {
+  margin: 0 0 4px;
+
+  color: #321060;
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.vehicle-number {
+  margin: 0;
+
+  color: #998da1;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   ROUTE DISPLAY
+========================================= */
+
+.route-display {
+  display: grid;
+
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 22px 0;
+
+  padding: 15px 0;
+
+  border-top: 1px solid #f0ebf3;
+  border-bottom: 1px solid #f0ebf3;
+}
+
+.route-display > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.route-display > div:last-child {
+  text-align: right;
+}
+
+.route-display strong {
+  color: #3b2c46;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.route-display small {
+  color: #a097a5;
+
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.route-display > span {
+  color: #9239e8;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+/* =========================================
+   VEHICLE INFO
+========================================= */
+
+.vehicle-info {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+.vehicle-info > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.vehicle-info span {
+  color: #9a8fa2;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.vehicle-info strong {
+  color: #44354e;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   SEAT PROGRESS
+========================================= */
+
+.seat-progress {
+  margin-bottom: 20px;
+}
+
+.progress-label {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+}
+
+.progress-label span {
+  color: #887c92;
+
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.progress-label strong {
+  color: #321060;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 7px;
+
+  background: #eee8f2;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  margin-bottom: 6px;
+}
+
+.progress-bar div {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #6b21c9,
+    #9239e8,
+    #f0449c
+  );
+
+  transition: width 0.4s ease;
+}
+
+.seat-progress > small {
+  color: #9a8fa1;
+
+  font-size: 9px;
+  font-weight: 500;
+}
+
+
+/* =========================================
+   VEHICLE ACTIONS
+========================================= */
+
+.vehicle-actions {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 9px;
+}
+
+.edit-button,
+.delete-button {
+  border-radius: 9px;
+
+  padding: 10px;
+
+  font-family: inherit;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.edit-button {
+  background: #f3ecfa;
+
+  border: 1px solid #e5d7ef;
+
+  color: #6b21c9;
+}
+
+.edit-button:hover {
+  background: #eadcf4;
+}
+
+.delete-button {
+  background: #fff0f4;
+
+  border: 1px solid #f6d5e1;
+
+  color: #d63369;
+}
+
+.delete-button:hover {
+  background: #fce0e9;
+}
+
+
+/* =========================================
+   BOOKING COUNT
+========================================= */
+
+.booking-count {
+  background: #f3eafa;
+
+  color: #6b21c9;
+
+  padding: 10px 14px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   ROUTES GRID
+========================================= */
+
+/* =========================================
+   ROUTES GRID
+========================================= */
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  width: 100%;
+  align-items: stretch;
+}
+
+
+/* =========================================
+   ROUTE CARD
+========================================= */
+
+.route-card {
+  width: 100%;
+  min-width: 0;
+  height: 155px;
+
+  background: white;
+  border: 1px solid #eee7f2;
+  border-radius: 18px;
+
+  padding: 20px 22px;
+
+  box-shadow:
+    0 5px 18px rgba(50, 16, 96, 0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  /*
+    Fixed horizontal arrangement:
+
+    Bus / Active | Operator + Route | Departure / Booked / Available
+  */
+
+  display: grid;
+
+  grid-template-columns:
+    105px
+    minmax(0, 1fr)
+    180px;
+
+  align-items: center;
+
+  column-gap: 18px;
+
+  overflow: hidden;
+}
+
+.route-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(50, 16, 96, 0.08);
+}
+
+
+/* =========================================
+   ROUTE CARD HEADER
+========================================= */
+
+.route-card-header {
+  grid-column: 1;
+  grid-row: 1;
+
+  width: 105px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin: 0;
+}
+
+
+/* =========================================
+   BUS / TRAIN TYPE
+========================================= */
+
+.route-type {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #6b21c9;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+.route-type svg {
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+
+/* =========================================
+   ACTIVE BADGE
+========================================= */
+
+.route-card-header .active-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 10px;
+
+  border-radius: 7px;
+
+  background: #eaf8f1;
+  color: #159a65;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   OPERATOR NAME
+========================================= */
+
+.route-card h3 {
+  grid-column: 2;
+  grid-row: 1;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+
+  color: #321060;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  line-height: 1.25;
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   ROUTE LINE
+========================================= */
+
+.route-line {
+  grid-column: 2;
+  grid-row: 1;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  position: relative;
+
+  /*
+    Keeps the city names aligned beside
+    the operator name.
+  */
+
+  padding-left: 105px;
+
+  margin: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================
+   ROUTE POINT
+========================================= */
+
+.route-point {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  min-width: 0;
+}
+
+.route-point span {
+  width: 9px;
+  height: 9px;
+
+  min-width: 9px;
+
+  border-radius: 50%;
+
+  background: #9239e8;
+
+  box-shadow:
+    0 0 0 4px #f1e8fb;
+}
+
+.route-point:last-child span {
+  background: #f0449c;
+
+  box-shadow:
+    0 0 0 4px #fce9f3;
+}
+
+.route-point strong {
+  color: #493951;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================
+   ROUTE ARROW
+========================================= */
+
+.route-arrow {
+  color: #7c3aed;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  margin-left: 1px;
+}
+
+
+/* =========================================
+   ROUTE DETAILS
+========================================= */
+
+.route-details {
+  grid-column: 3;
+  grid-row: 1;
+
+  width: 100%;
+  min-width: 0;
+
+  height: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  align-items: center;
+
+  padding: 0 0 0 16px;
+
+  border-top: none;
+  border-left: 1px solid #f0ebf3;
+
+  box-sizing: border-box;
+}
+
+.route-details > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.route-details small {
+  color: #9a8fa2;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+.route-details strong {
+  color: #44354e;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  line-height: 1.25;
+
+  white-space: normal;
+}
+
+.route-details .available-text {
+  color: #159a65;
+}
+
+/* =====================================================
+   ADMIN NOTIFICATION BADGE
+   ===================================================== */
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -7px;
+
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ff4f81;
+  color: #ffffff;
+
+  border: 2px solid #ffffff;
+  border-radius: 50px;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}

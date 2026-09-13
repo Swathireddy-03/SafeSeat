@@ -1,0 +1,1039 @@
+/* =====================================================
+   PASSENGER DETAILS - SAFESEAT
+===================================================== */
+
+.passenger-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 5% 10%, rgba(99, 102, 241, 0.16), transparent 32%),
+    radial-gradient(circle at 95% 15%, rgba(236, 72, 153, 0.14), transparent 30%),
+    linear-gradient(135deg, #f8faff 0%, #eef2ff 50%, #fff5fa 100%);
+  color: #172033;
+  padding-bottom: 60px;
+}
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.passenger-navbar {
+  height: 76px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* BRAND */
+
+.passenger-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  cursor: pointer;
+}
+
+.passenger-logo {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: linear-gradient(
+    135deg,
+    #4f46e5,
+    #7c3aed,
+    #ec4899
+  );
+
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+
+  box-shadow:
+    0 8px 22px rgba(99, 102, 241, 0.25);
+}
+
+.passenger-brand div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.passenger-brand strong {
+  font-size: 20px;
+  color: #172033;
+}
+
+.passenger-brand span {
+  margin-top: 2px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* ROUTE */
+
+.passenger-route {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.passenger-route strong {
+  font-size: 17px;
+  color: #172033;
+}
+
+.passenger-route span {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* BACK BUTTON */
+
+.passenger-back-button {
+  border: 1px solid #d8def0;
+
+  background: white;
+  color: #4f46e5;
+
+  padding: 10px 17px;
+
+  border-radius: 11px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.passenger-back-button:hover {
+  background: #eef2ff;
+  border-color: #a5b4fc;
+  transform: translateY(-1px);
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.passenger-container {
+  width: min(1180px, 92%);
+  margin: 42px auto 0;
+}
+
+/* =====================================================
+   HEADING
+===================================================== */
+
+.passenger-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 30px;
+
+  margin-bottom: 30px;
+}
+
+.passenger-heading > div:first-child > span {
+  display: inline-block;
+
+  color: #6366f1;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  margin-bottom: 8px;
+}
+
+.passenger-heading h1 {
+  margin: 0;
+
+  font-size: 39px;
+  line-height: 1.15;
+
+  font-weight: 800;
+
+  background: linear-gradient(
+    90deg,
+    #312e81,
+    #6366f1,
+    #db2777
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.passenger-heading p {
+  margin: 10px 0 0;
+
+  color: #64748b;
+
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* JOURNEY SUMMARY */
+
+.journey-summary {
+  min-width: 230px;
+
+  padding: 16px 20px;
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  border: 1px solid rgba(148, 163, 184, 0.2);
+
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.06);
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.journey-summary strong {
+  color: #312e81;
+  font-size: 17px;
+}
+
+.journey-summary span {
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.booking-progress {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 30px;
+
+  padding: 18px 25px;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  border: 1px solid rgba(148, 163, 184, 0.18);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.05);
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  white-space: nowrap;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+.progress-step span {
+  width: 29px;
+  height: 29px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #e2e8f0;
+
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.progress-step.completed span {
+  background: #22c55e;
+  color: white;
+}
+
+.progress-step.completed strong {
+  color: #16a34a;
+}
+
+.progress-step.current span {
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #8b5cf6
+  );
+
+  color: white;
+
+  box-shadow:
+    0 6px 15px rgba(99, 102, 241, 0.25);
+}
+
+.progress-step.current strong {
+  color: #4f46e5;
+}
+
+.progress-line {
+  height: 2px;
+
+  flex: 1;
+
+  margin: 0 14px;
+
+  background: #e2e8f0;
+}
+
+.progress-line.active {
+  background: linear-gradient(
+    90deg,
+    #22c55e,
+    #6366f1
+  );
+}
+
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
+.passenger-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    350px;
+
+  gap: 25px;
+
+  align-items: start;
+}
+
+/* =====================================================
+   PASSENGER FORMS
+===================================================== */
+
+.passenger-forms {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* CARD */
+
+.passenger-form-card {
+  background: rgba(255, 255, 255, 0.9);
+
+  border: 1px solid rgba(148, 163, 184, 0.2);
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 12px 35px rgba(15, 23, 42, 0.07);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.passenger-form-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.10);
+}
+
+/* =====================================================
+   CARD HEADER
+===================================================== */
+
+.passenger-card-header {
+  padding: 18px 22px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(99, 102, 241, 0.07),
+      rgba(236, 72, 153, 0.06)
+    );
+
+  border-bottom: 1px solid #edf0f7;
+}
+
+.passenger-card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.passenger-avatar {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #8b5cf6
+  );
+
+  color: white;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  box-shadow:
+    0 7px 16px rgba(99, 102, 241, 0.2);
+}
+
+.passenger-card-title > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.passenger-card-title strong {
+  font-size: 17px;
+  color: #172033;
+}
+
+.passenger-card-title span {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* SEAT BADGE */
+
+.seat-badge {
+  padding: 7px 12px;
+
+  border-radius: 20px;
+
+  background: #eef2ff;
+
+  color: #4f46e5;
+
+  border: 1px solid #c7d2fe;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.passenger-form-grid {
+  padding: 23px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 19px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  margin-bottom: 7px;
+
+  color: #334155;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+
+  height: 45px;
+
+  padding: 0 13px;
+
+  border-radius: 11px;
+
+  border: 1px solid #dbe1ee;
+
+  background: #ffffff;
+
+  color: #172033;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.form-field input::placeholder {
+  color: #a0aabc;
+  font-size: 14px;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: #818cf8;
+
+  background: #fbfbff;
+
+  box-shadow:
+    0 0 0 4px rgba(99, 102, 241, 0.09);
+}
+
+.form-field select {
+  cursor: pointer;
+}
+
+/* ERROR */
+
+.field-error {
+  margin-top: 6px;
+
+  color: #dc2626;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =====================================================
+   SUMMARY CARD
+===================================================== */
+
+.passenger-summary-card {
+  position: sticky;
+  top: 100px;
+
+  padding: 24px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(248, 250, 255, 0.96)
+    );
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(148, 163, 184, 0.2);
+
+  box-shadow:
+    0 18px 45px rgba(15, 23, 42, 0.09);
+}
+
+.summary-label {
+  display: block;
+
+  color: #6366f1;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+}
+
+.passenger-summary-card h2 {
+  margin: 5px 0 20px;
+
+  font-size: 25px;
+
+  color: #172033;
+}
+
+/* =====================================================
+   SUMMARY BUS
+===================================================== */
+
+.summary-bus {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.summary-bus-logo {
+  width: 43px;
+  height: 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #4f46e5,
+    #7c3aed
+  );
+
+  color: white;
+
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.summary-bus div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.summary-bus strong {
+  font-size: 16px;
+  color: #172033;
+}
+
+.summary-bus span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* =====================================================
+   ROUTE
+===================================================== */
+
+.passenger-summary-route {
+  display: grid;
+
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 21px 0;
+}
+
+.passenger-summary-route > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.passenger-summary-route > div:last-child {
+  text-align: right;
+}
+
+.passenger-summary-route strong {
+  font-size: 22px;
+  color: #172033;
+}
+
+.passenger-summary-route span {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.route-arrow {
+  color: #6366f1;
+
+  font-size: 24px;
+  font-weight: 800;
+
+  text-align: center !important;
+}
+
+/* =====================================================
+   DETAIL ROWS
+===================================================== */
+
+.summary-detail-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 10px 0;
+}
+
+.summary-detail-row span {
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+.summary-detail-row strong {
+  color: #172033;
+
+  font-size: 14px;
+
+  text-align: right;
+}
+
+.summary-divider {
+  height: 1px;
+
+  background: #e2e8f0;
+
+  margin: 12px 0;
+}
+
+/* =====================================================
+   FARE
+===================================================== */
+
+.fare-row {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 8px 0;
+}
+
+.fare-row span {
+  color: #64748b;
+
+  font-size: 14px;
+}
+
+.fare-row strong {
+  color: #334155;
+
+  font-size: 15px;
+}
+
+.total-fare {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 7px;
+
+  padding-top: 14px;
+
+  border-top: 1px dashed #cbd5e1;
+}
+
+.total-fare span {
+  color: #172033;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+.total-fare strong {
+  color: #4f46e5;
+
+  font-size: 27px;
+
+  font-weight: 800;
+}
+
+/* =====================================================
+   CONTINUE BUTTON
+===================================================== */
+
+.passenger-continue-button {
+  width: 100%;
+
+  height: 49px;
+
+  margin-top: 20px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4f46e5,
+      #7c3aed,
+      #db2777
+    );
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  box-shadow:
+    0 12px 25px rgba(99, 102, 241, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.passenger-continue-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 30px rgba(99, 102, 241, 0.32);
+}
+
+.passenger-continue-button:active {
+  transform: translateY(0);
+}
+
+.passenger-continue-button span {
+  font-size: 20px;
+}
+
+/* =====================================================
+   SECURITY NOTE
+===================================================== */
+
+.secure-note {
+  margin: 14px 0 0;
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 950px) {
+
+  .passenger-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .passenger-summary-card {
+    position: static;
+  }
+
+  .passenger-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .journey-summary {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 700px) {
+
+  .passenger-navbar {
+    padding: 0 4%;
+  }
+
+  .passenger-route {
+    display: none;
+  }
+
+  .passenger-container {
+    width: 94%;
+    margin-top: 28px;
+  }
+
+  .passenger-heading h1 {
+    font-size: 32px;
+  }
+
+  .passenger-heading p {
+    font-size: 15px;
+  }
+
+  .booking-progress {
+    padding: 15px;
+  }
+
+  .progress-step strong {
+    display: none;
+  }
+
+  .progress-line {
+    margin: 0 8px;
+  }
+
+  .passenger-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-field.full-width {
+    grid-column: auto;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 500px) {
+
+  .passenger-navbar {
+    height: 68px;
+  }
+
+  .passenger-brand span {
+    display: none;
+  }
+
+  .passenger-back-button {
+    padding: 8px 11px;
+    font-size: 13px;
+  }
+
+  .passenger-heading h1 {
+    font-size: 29px;
+  }
+
+  .passenger-heading p {
+    font-size: 14px;
+  }
+
+  .booking-progress {
+    border-radius: 14px;
+  }
+
+  .progress-step span {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+  }
+
+  .progress-line {
+    margin: 0 5px;
+  }
+
+  .passenger-card-header {
+    padding: 15px;
+  }
+
+  .passenger-card-title strong {
+    font-size: 16px;
+  }
+
+  .passenger-card-title span {
+    font-size: 13px;
+  }
+
+  .seat-badge {
+    font-size: 12px;
+  }
+
+  .passenger-form-grid {
+    padding: 17px;
+  }
+
+  .form-field label {
+    font-size: 13px;
+  }
+
+  .form-field input,
+  .form-field select {
+    font-size: 14px;
+  }
+
+  .passenger-summary-card {
+    padding: 19px;
+  }
+
+  .passenger-summary-card h2 {
+    font-size: 23px;
+  }
+
+  .passenger-summary-route strong {
+    font-size: 19px;
+  }
+
+  .summary-detail-row span,
+  .summary-detail-row strong,
+  .fare-row span {
+    font-size: 13px;
+  }
+
+  .total-fare strong {
+    font-size: 24px;
+  }
+
+  .passenger-continue-button {
+    font-size: 14px;
+  }
+
+  .secure-note {
+    font-size: 11px;
+  }
+}

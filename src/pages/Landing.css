@@ -1,0 +1,537 @@
+* {
+  box-sizing: border-box;
+}
+
+.landing-page {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background:
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(146, 57, 232, 0.22),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 10% 90%,
+      rgba(240, 68, 156, 0.18),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #faf8fd 0%,
+      #f7f0ff 48%,
+      #eee4ff 100%
+    );
+  color: #321060;
+}
+
+.landing-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.landing-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.circle-one {
+  width: 380px;
+  height: 380px;
+  right: -120px;
+  top: -130px;
+  background: rgba(146, 57, 232, 0.12);
+}
+
+.circle-two {
+  width: 250px;
+  height: 250px;
+  left: -100px;
+  bottom: -80px;
+  background: rgba(240, 68, 156, 0.12);
+}
+
+.circle-three {
+  width: 120px;
+  height: 120px;
+  right: 35%;
+  bottom: 8%;
+  background: rgba(63, 124, 255, 0.08);
+}
+
+.landing-content {
+  width: min(1180px, 92%);
+  min-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 0 24px;
+}
+
+.landing-logo {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  color: #321060;
+}
+
+.landing-logo span {
+  color: #9239e8;
+}
+
+.landing-tagline {
+  margin: 3px 0 0;
+  color: #777080;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.landing-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  align-items: center;
+  gap: 70px;
+  padding: 35px 0;
+}
+
+.landing-small-title {
+  color: #9239e8;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.landing-text h1 {
+  font-size: clamp(48px, 6vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -4px;
+  margin: 0;
+  color: #321060;
+}
+
+.landing-text h1 span {
+  background: linear-gradient(90deg, #9239e8, #f0449c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.landing-description {
+  max-width: 510px;
+  color: #6f6877;
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 25px 0 30px;
+}
+
+.landing-button {
+  border: none;
+  background: linear-gradient(135deg, #6b21c9, #9239e8);
+  color: white;
+  padding: 15px 22px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 12px 28px rgba(107, 33, 201, 0.25);
+  transition: 0.3s ease;
+}
+
+.landing-button svg {
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.landing-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(107, 33, 201, 0.3);
+}
+
+.landing-button:hover svg {
+  transform: translateX(5px);
+}
+
+/* =========================
+   LANDING VISUAL
+========================= */
+
+.landing-visual {
+  height: 480px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visual-circle {
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    #6b21c9,
+    #9239e8,
+    #f0449c
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 30px 70px rgba(107, 33, 201, 0.24),
+    inset 0 0 50px rgba(255, 255, 255, 0.12);
+  animation: floating 5s ease-in-out infinite;
+}
+
+.visual-circle span {
+  color: white;
+  font-size: 82px;
+  font-weight: 900;
+  letter-spacing: -8px;
+}
+
+/* =========================
+   TRAVEL CARDS
+========================= */
+
+.travel-card,
+.seat-card {
+  position: absolute;
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  padding: 15px 18px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  box-shadow: 0 15px 35px rgba(50, 16, 96, 0.12);
+  animation: floating 4s ease-in-out infinite;
+}
+
+.travel-card strong,
+.seat-card strong {
+  display: block;
+  color: #321060;
+  font-size: 14px;
+}
+
+.travel-card small,
+.seat-card small {
+  display: block;
+  color: #8a8291;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+/* EXACT DASHBOARD-LIKE ICON BOX */
+
+.travel-icon,
+.seat-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+/* BUS - PURPLE */
+
+.bus-icon {
+  background: #eee1ff;
+  color: #9239e8;
+}
+
+.bus-icon svg {
+  font-size: 20px;
+}
+
+/* TRAIN - PINK */
+
+.train-icon {
+  background: #fde4f0;
+  color: #e52f86;
+}
+
+.train-icon svg {
+  font-size: 20px;
+}
+
+/* SEAT - PURPLE */
+
+.seat-icon {
+  background: #eee7fb;
+  color: #7651b8;
+}
+
+.seat-icon svg {
+  font-size: 20px;
+}
+
+.bus-card {
+  top: 55px;
+  left: 5px;
+}
+
+.train-card {
+  right: 0;
+  top: 155px;
+  animation-delay: 0.8s;
+}
+
+.seat-card {
+  bottom: 65px;
+  left: 55px;
+  animation-delay: 1.4s;
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.landing-features {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: 17px 20px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.feature-item p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #5e5667;
+}
+
+/* DASHBOARD STYLE SMALL ICON BOXES */
+
+.feature-icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feature-icon svg {
+  font-size: 15px;
+}
+
+/* BUS */
+
+.feature-bus {
+  background: #eee1ff;
+  color: #9239e8;
+}
+
+/* TRAIN */
+
+.feature-train {
+  background: #fde4f0;
+  color: #e52f86;
+}
+
+/* SEAT */
+
+.feature-seat {
+  background: #eee7fb;
+  color: #7651b8;
+}
+
+/* TICKET */
+
+.feature-ticket {
+  background: #e8efff;
+  color: #3f7cff;
+}
+
+.feature-divider {
+  height: 22px;
+  width: 1px;
+  background: #d9cfdf;
+}
+
+.landing-hint {
+  text-align: center;
+  color: #938b99;
+  font-size: 11px;
+  margin: 14px 0 0;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes floating {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 850px) {
+  .landing-main {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .landing-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .landing-visual {
+    height: 340px;
+    margin-top: -10px;
+  }
+
+  .visual-circle {
+    width: 220px;
+    height: 220px;
+  }
+
+  .visual-circle span {
+    font-size: 60px;
+  }
+
+  .bus-card {
+    left: 5%;
+    top: 20px;
+  }
+
+  .train-card {
+    right: 3%;
+    top: 90px;
+  }
+
+  .seat-card {
+    left: 10%;
+    bottom: 25px;
+  }
+
+  .landing-features {
+    gap: 12px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .landing-content {
+    padding-top: 25px;
+  }
+
+  .landing-logo {
+    font-size: 25px;
+  }
+
+  .landing-text h1 {
+    font-size: 48px;
+    letter-spacing: -2.5px;
+  }
+
+  .landing-description {
+    font-size: 14px;
+  }
+
+  .landing-visual {
+    height: 280px;
+  }
+
+  .visual-circle {
+    width: 180px;
+    height: 180px;
+  }
+
+  .visual-circle span {
+    font-size: 48px;
+  }
+
+  .travel-card,
+  .seat-card {
+    padding: 10px 12px;
+  }
+
+  .travel-icon,
+  .seat-icon {
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    border-radius: 10px;
+    font-size: 17px;
+  }
+
+  .travel-icon svg,
+  .seat-icon svg {
+    font-size: 17px;
+  }
+
+  .travel-card strong,
+  .seat-card strong {
+    font-size: 11px;
+  }
+
+  .travel-card small,
+  .seat-card small {
+    font-size: 9px;
+  }
+
+  .landing-features {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+
+  .feature-divider {
+    display: none;
+  }
+
+  .feature-icon {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+    border-radius: 9px;
+  }
+
+  .feature-icon svg {
+    font-size: 13px;
+  }
+}

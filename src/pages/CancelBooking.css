@@ -1,0 +1,957 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --purple: #6b21c9;
+  --purple-dark: #321060;
+  --pink: #f0449c;
+
+  --background: #faf8fd;
+  --white: #ffffff;
+
+  --text: #21152d;
+  --muted: #777080;
+
+  --border: #e9e2ef;
+
+  --danger: #d23c67;
+}
+
+/* =========================================
+   PAGE
+========================================= */
+
+.cancel-page {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 5% 10%,
+      rgba(240, 68, 156, 0.08),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 95% 15%,
+      rgba(107, 33, 201, 0.09),
+      transparent 28%
+    ),
+    var(--background);
+
+  color: var(--text);
+
+  font-family: "DM Sans", sans-serif;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.cancel-navbar {
+  height: 76px;
+
+  padding: 0 5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  border-bottom: 1px solid #eee7f4;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 5px 25px rgba(53, 20, 88, 0.05);
+}
+
+/* LOGO */
+
+.cancel-logo {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  cursor: pointer;
+}
+
+.cancel-logo-box {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #681bc8,
+      #f0449c
+    );
+
+  color: white;
+
+  font-size: 23px;
+  font-weight: 800;
+
+  box-shadow:
+    0 8px 20px rgba(106, 31, 209, 0.2);
+}
+
+.cancel-logo-text {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.cancel-logo-text strong {
+  color: var(--purple-dark);
+
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.cancel-logo-text span {
+  margin-top: 3px;
+
+  color: #99919f;
+
+  font-size: 12px;
+
+  letter-spacing: 0.7px;
+}
+
+/* BACK BUTTON */
+
+.cancel-back-btn {
+  height: 40px;
+
+  padding: 0 17px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 9px;
+
+  background: white;
+
+  color: #625a68;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.cancel-back-btn:hover {
+  color: var(--purple);
+
+  border-color: #c9a0e7;
+
+  background: #fcf9ff;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.cancel-container {
+  width: min(1000px, 92%);
+
+  margin: auto;
+
+  padding: 65px 0 90px;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.cancel-header {
+  text-align: center;
+
+  margin-bottom: 35px;
+}
+
+.cancel-header > span {
+  color: var(--pink);
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.cancel-header h1 {
+  margin: 12px 0;
+
+  color: var(--purple-dark);
+
+  font-size: 47px;
+
+  letter-spacing: -1.5px;
+}
+
+.cancel-header h1 strong {
+  background:
+    linear-gradient(
+      90deg,
+      var(--purple),
+      var(--pink)
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+.cancel-header p {
+  max-width: 550px;
+
+  margin: auto;
+
+  color: var(--muted);
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   SEARCH CARD
+========================================= */
+
+.cancel-search-card {
+  padding: 25px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 16px;
+
+  background: white;
+
+  box-shadow:
+    0 15px 40px rgba(66, 25, 102, 0.07);
+}
+
+.cancel-search-icon {
+  width: 55px;
+  height: 55px;
+
+  flex-shrink: 0;
+
+  border-radius: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff0f6;
+
+  color: var(--pink);
+
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.cancel-search-content {
+  width: 100%;
+}
+
+.cancel-search-content label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #99919f;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.cancel-search-row {
+  display: flex;
+
+  gap: 10px;
+}
+
+.cancel-search-row input {
+  width: 100%;
+
+  height: 48px;
+
+  padding: 0 15px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #fcfbfe;
+
+  color: var(--text);
+
+  font-size: 15px;
+
+  font-weight: 600;
+}
+
+.cancel-search-row input:focus {
+  border-color: #bd8ddd;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 4px rgba(107, 33, 201, 0.05);
+}
+
+.cancel-search-row button {
+  height: 48px;
+
+  min-width: 145px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #701ed2,
+      #eb389e
+    );
+
+  color: white;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(107, 33, 201, 0.18);
+
+  transition: 0.2s ease;
+}
+
+.cancel-search-row button:hover {
+  transform: translateY(-2px);
+}
+
+.cancel-error {
+  margin-top: 10px;
+
+  color: var(--danger);
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+/* =========================================
+   BOOKING CARD
+========================================= */
+
+.cancel-booking-card {
+  margin-top: 25px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+
+  border-radius: 17px;
+
+  background: white;
+
+  box-shadow:
+    0 15px 45px rgba(66, 25, 102, 0.08);
+}
+
+/* HEADER */
+
+.cancel-booking-header {
+  padding: 23px 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid var(--border);
+
+  background: #fdfbfe;
+}
+
+.cancel-booking-header span {
+  color: var(--pink);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+}
+
+.cancel-booking-header h2 {
+  margin-top: 5px;
+
+  color: var(--purple-dark);
+
+  font-size: 25px;
+}
+
+.active-status {
+  padding: 8px 13px;
+
+  border-radius: 20px;
+
+  background: #e9f9f0;
+
+  color: #179354;
+
+  border: 1px solid #c9efd9;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+/* =========================================
+   ROUTE
+========================================= */
+
+.cancel-route {
+  padding: 28px 25px;
+
+  display: grid;
+
+  grid-template-columns: 1fr 100px 1fr;
+
+  align-items: center;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.cancel-route small {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #99919f;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+.cancel-route strong {
+  color: var(--purple-dark);
+
+  font-size: 21px;
+}
+
+.cancel-route-arrow {
+  text-align: center;
+
+  color: var(--pink);
+
+  font-size: 27px;
+
+  font-weight: 800;
+}
+
+.cancel-route-destination {
+  text-align: right;
+}
+
+/* =========================================
+   INFORMATION
+========================================= */
+
+.cancel-info-grid {
+  padding: 23px 25px;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 12px;
+}
+
+.cancel-info-grid > div {
+  padding: 14px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 9px;
+
+  background: #fcfbfe;
+}
+
+.cancel-info-grid span {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #99919f;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.cancel-info-grid strong {
+  color: var(--purple-dark);
+
+  font-size: 14px;
+}
+
+/* =========================================
+   WARNING
+========================================= */
+
+.cancel-warning {
+  margin: 0 25px 20px;
+
+  padding: 17px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  border: 1px solid #f3d4de;
+
+  border-radius: 10px;
+
+  background: #fff6f8;
+}
+
+.warning-icon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffe1e9;
+
+  color: var(--danger);
+
+  font-size: 21px;
+
+  font-weight: 800;
+}
+
+.cancel-warning strong {
+  color: #9d294e;
+
+  font-size: 14px;
+}
+
+.cancel-warning p {
+  margin-top: 4px;
+
+  color: #8e6874;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.cancel-actions {
+  padding: 20px 25px;
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  border-top: 1px solid var(--border);
+}
+
+.keep-booking-btn,
+.confirm-cancel-btn {
+  height: 40px;
+
+  padding: 0 18px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.keep-booking-btn {
+  border: 1px solid var(--border);
+
+  background: white;
+
+  color: #625a68;
+}
+
+.keep-booking-btn:hover {
+  border-color: #c9a0e7;
+
+  color: var(--purple);
+}
+
+.confirm-cancel-btn {
+  border: none;
+
+  background: var(--danger);
+
+  color: white;
+
+  box-shadow:
+    0 7px 17px rgba(210, 60, 103, 0.18);
+}
+
+.confirm-cancel-btn:hover {
+  background: #bd3159;
+
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   SUCCESS CARD
+========================================= */
+
+.cancel-success-card {
+  margin-top: 25px;
+
+  padding: 55px 30px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 17px;
+
+  background: white;
+
+  text-align: center;
+
+  box-shadow:
+    0 15px 45px rgba(66, 25, 102, 0.08);
+}
+
+.success-icon {
+  width: 65px;
+  height: 65px;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #e8f9ef;
+
+  color: #179354;
+
+  font-size: 31px;
+
+  font-weight: 800;
+}
+
+.cancel-success-card > span {
+  display: block;
+
+  margin-top: 20px;
+
+  color: #179354;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+}
+
+.cancel-success-card h2 {
+  margin: 10px 0;
+
+  color: var(--purple-dark);
+
+  font-size: 28px;
+}
+
+.cancel-success-card p {
+  margin-top: 20px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.success-booking-id {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--purple);
+
+  font-size: 20px;
+}
+
+.cancelled-status {
+  width: fit-content;
+
+  margin: 17px auto 0;
+
+  padding: 8px 14px;
+
+  border-radius: 20px;
+
+  background: #fff0f3;
+
+  color: var(--danger);
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+/* SUCCESS ACTIONS */
+
+.success-actions {
+  margin-top: 28px;
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.success-actions button {
+  height: 40px;
+
+  padding: 0 17px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.success-actions button:first-child {
+  border: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      #701ed2,
+      #eb389e
+    );
+
+  color: white;
+}
+
+.success-actions button:last-child {
+  border: 1px solid var(--border);
+
+  background: white;
+
+  color: #625a68;
+}
+
+.success-actions button:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   EMPTY
+========================================= */
+
+.cancel-empty {
+  margin-top: 25px;
+
+  padding: 60px 30px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 16px;
+
+  background: white;
+
+  text-align: center;
+}
+
+.cancel-empty > div {
+  width: 65px;
+  height: 65px;
+
+  margin: auto;
+
+  border-radius: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff0f6;
+
+  font-size: 30px;
+}
+
+.cancel-empty h2 {
+  margin: 20px 0 9px;
+
+  color: var(--purple-dark);
+
+  font-size: 24px;
+}
+
+.cancel-empty p {
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 750px) {
+
+  .cancel-container {
+    padding-top: 45px;
+  }
+
+  .cancel-header h1 {
+    font-size: 39px;
+  }
+
+  .cancel-search-card {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .cancel-search-icon {
+    margin: auto;
+  }
+
+  .cancel-search-row {
+    flex-direction: column;
+  }
+
+  .cancel-search-row button {
+    width: 100%;
+  }
+
+  .cancel-route {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+  .cancel-route-destination {
+    text-align: left;
+  }
+
+  .cancel-route-arrow {
+    text-align: left;
+  }
+
+  .cancel-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cancel-actions {
+    flex-direction: column;
+  }
+
+  .keep-booking-btn,
+  .confirm-cancel-btn {
+    width: 100%;
+  }
+
+  .success-actions {
+    flex-direction: column;
+  }
+
+  .success-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .cancel-navbar {
+    padding: 0 4%;
+  }
+
+  .cancel-logo-text span {
+    display: none;
+  }
+
+  .cancel-header h1 {
+    font-size: 34px;
+  }
+
+  .cancel-booking-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 12px;
+  }
+
+  .cancel-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cancel-warning {
+    align-items: flex-start;
+  }
+}
