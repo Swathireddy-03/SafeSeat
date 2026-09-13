@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./SeatSelection.css";
 import Footer from "../components/Footer";
-const API_URL = "http://localhost:5000";
+const API_URL = "https://safeseat-1.onrender.com";
 
 const DEFAULT_TOTAL_SEATS = 36;
 

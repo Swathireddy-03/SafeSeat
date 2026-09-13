@@ -150,7 +150,7 @@ function BusResults() {
             : to.trim();
 
         const API_URL =
-          `http://localhost:5000/api/buses/search` +
+          `https://safeseat-1.onrender.com/api/buses/search` +
           `?from=${encodeURIComponent(searchFrom)}` +
           `&to=${encodeURIComponent(searchTo)}`;
 

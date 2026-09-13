@@ -57,7 +57,7 @@ function Signup() {
       // ==========================================
 
       const response = await fetch(
-  "http://localhost:5000/api/auth/signup",
+  "https://safeseat-1.onrender.com/api/auth/signup",
         {
           method: "POST",
 

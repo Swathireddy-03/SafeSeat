@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./TrackTicket.css";
 import Footer from "../components/Footer";
-const API_BASE_URL = "http://localhost:5000";
+const API_BASE_URL = "https://safeseat-1.onrender.com";
 
 function TrackTicket() {
   const navigate = useNavigate();
