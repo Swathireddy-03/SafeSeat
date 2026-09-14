@@ -673,14 +673,10 @@ router.patch("/:bookingId/cancel", async (req, res) => {
     const [result] = await db.execute(
       `
       UPDATE bookings
-
       SET booking_status = 'Cancelled'
-
-      WHERE
-        booking_id = ?
-        OR id = ?
+      WHERE booking_id = ?
       `,
-      [bookingId, bookingId]
+      [bookingId]
     );
 
     if (result.affectedRows === 0) {
@@ -694,7 +690,6 @@ router.patch("/:bookingId/cancel", async (req, res) => {
       success: true,
       message: "Booking cancelled successfully",
     });
-
   } catch (error) {
     console.error("CANCEL BOOKING ERROR:", error);
 
@@ -705,7 +700,6 @@ router.patch("/:bookingId/cancel", async (req, res) => {
     });
   }
 });
-
 
 /* =========================================================
    EXPORT ROUTER
