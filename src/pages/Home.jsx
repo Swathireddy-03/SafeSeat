@@ -67,9 +67,9 @@ function getSelectedDay(dateValue) {
 function Home() {
   const navigate = useNavigate();
 
-  /* =====================================================
-     USER
-  ====================================================== */
+  // =====================================================
+  // USER
+  // =====================================================
 
   const [user, setUser] = useState(null);
 
@@ -81,39 +81,28 @@ function Home() {
         const parsedUser = JSON.parse(savedUser);
         setUser(parsedUser);
       } catch (error) {
-        console.error(
-          "Unable to read logged-in user:",
-          error
-        );
-
+        console.error("Unable to read logged-in user:", error);
         setUser(null);
       }
     }
   }, []);
 
-  /* =====================================================
-     SEARCH STATES
-  ====================================================== */
+  // =====================================================
+  // SEARCH STATES
+  // =====================================================
 
   const [mode, setMode] = useState("bus");
-
   const [from, setFrom] = useState("");
-
   const [to, setTo] = useState("");
-
   const [locationType, setLocationType] = useState(null);
-
   const [preference, setPreference] = useState("none");
-
   const [date, setDate] = useState(getTodayDate());
-
   const [passengers, setPassengers] = useState(1);
-
   const [locationSearch, setLocationSearch] = useState("");
 
-  /* =====================================================
-     MODE DATA
-  ====================================================== */
+  // =====================================================
+  // MODE DATA
+  // =====================================================
 
   const modeData = {
     bus: {
@@ -139,19 +128,17 @@ function Home() {
 
   const currentMode = modeData[mode];
 
-  /* =====================================================
-     FILTER LOCATIONS
-  ====================================================== */
+  // =====================================================
+  // FILTER LOCATIONS
+  // =====================================================
 
   const filteredCities = cities.filter((city) =>
-    city
-      .toLowerCase()
-      .includes(locationSearch.toLowerCase())
+    city.toLowerCase().includes(locationSearch.toLowerCase())
   );
 
-  /* =====================================================
-     SELECT CITY
-  ====================================================== */
+  // =====================================================
+  // SELECT CITY
+  // =====================================================
 
   const selectCity = (city) => {
     if (locationType === "from") {
@@ -166,9 +153,9 @@ function Home() {
     setLocationSearch("");
   };
 
-  /* =====================================================
-     SWAP LOCATIONS
-  ====================================================== */
+  // =====================================================
+  // SWAP LOCATIONS
+  // =====================================================
 
   const swapLocations = () => {
     const oldFrom = from;
@@ -177,9 +164,9 @@ function Home() {
     setTo(oldFrom);
   };
 
-  /* =====================================================
-     SEARCH
-  ====================================================== */
+  // =====================================================
+  // SEARCH
+  // =====================================================
 
   const handleSearch = () => {
     if (!from || !to) {
@@ -219,30 +206,26 @@ function Home() {
     }
   };
 
-  /* =====================================================
-     CURRENT LOCATION
-  ====================================================== */
+  // =====================================================
+  // CURRENT LOCATION
+  // =====================================================
 
   const handleCurrentLocation = () => {
     setFrom("Hyderabad");
-
     setLocationType(null);
-
     setLocationSearch("");
   };
 
-  /* =====================================================
-     LOGOUT
-  ====================================================== */
+  // =====================================================
+  // LOGOUT
+  // =====================================================
 
   const handleLogout = () => {
     localStorage.removeItem("safeSeatUser");
     localStorage.removeItem("currentUser");
     localStorage.removeItem("safeSeatUserId");
-
     localStorage.removeItem("safeSeatUserName");
     localStorage.removeItem("safeSeatUserEmail");
-
     localStorage.removeItem("busmateLoggedIn");
     localStorage.removeItem("busmateUser");
     localStorage.removeItem("busmateUserId");
@@ -254,9 +237,9 @@ function Home() {
     });
   };
 
-  /* =====================================================
-     USER DISPLAY NAME
-  ====================================================== */
+  // =====================================================
+  // USER DISPLAY NAME
+  // =====================================================
 
   const displayName =
     user?.name ||
@@ -271,7 +254,7 @@ function Home() {
 
       {/* =====================================================
           NAVBAR
-      ====================================================== */}
+      ===================================================== */}
 
       <header className="modern-navbar">
 
@@ -286,13 +269,9 @@ function Home() {
           </div>
 
           <div className="modern-logo-text">
-            <strong>
-              SafeSeat
-            </strong>
+            <strong>SafeSeat</strong>
 
-            <span>
-              Travel smarter
-            </span>
+            <span>Travel smarter</span>
           </div>
         </div>
 
@@ -352,25 +331,13 @@ function Home() {
           {user && (
             <div className="navbar-user">
 
-              {/* USER AVATAR */}
-
               <div className="navbar-user-avatar">
-                {displayName
-                  .charAt(0)
-                  .toUpperCase()}
+                {displayName.charAt(0).toUpperCase()}
               </div>
-
-              {/* USERNAME */}
 
               <div className="navbar-user-details">
-
-                <strong>
-                  {displayName}
-                </strong>
-
+                <strong>{displayName}</strong>
               </div>
-
-              {/* LOGOUT */}
 
               <button
                 type="button"
@@ -389,12 +356,11 @@ function Home() {
 
       {/* =====================================================
           HERO
-      ====================================================== */}
+      ===================================================== */}
 
       <section className="hero-section">
 
         <div className="hero-glow glow-one"></div>
-
         <div className="hero-glow glow-two"></div>
 
         <div className="hero-content">
@@ -407,15 +373,13 @@ function Home() {
           <h1>
             One platform.
             <br />
-            <span>
-              Every journey.
-            </span>
+            <span>Every journey.</span>
           </h1>
 
           <p>
-            Search buses and trains, choose your
-            preferred surroundings and make every
-            journey more comfortable with SafeSeat.
+            Search buses and trains, choose your preferred
+            surroundings and make every journey more
+            comfortable with SafeSeat.
           </p>
 
           <div className="hero-highlights">
@@ -439,9 +403,7 @@ function Home() {
 
         </div>
 
-        {/* =====================================================
-            SEARCH CARD
-        ====================================================== */}
+        {/* SEARCH CARD */}
 
         <div className="travel-search-card">
 
@@ -450,31 +412,23 @@ function Home() {
           <div className="mode-selector">
 
             {travelModes.map((travelMode) => (
-
               <button
                 key={travelMode.id}
                 type="button"
                 className={`mode-button ${
-                  mode === travelMode.id
-                    ? "selected"
-                    : ""
+                  mode === travelMode.id ? "selected" : ""
                 }`}
                 onClick={() => {
                   setMode(travelMode.id);
                   setPreference("none");
                 }}
               >
-
                 <span className="mode-icon">
                   {travelMode.icon}
                 </span>
 
-                <span>
-                  {travelMode.label}
-                </span>
-
+                <span>{travelMode.label}</span>
               </button>
-
             ))}
 
           </div>
@@ -484,20 +438,14 @@ function Home() {
           <div className="search-heading">
 
             <div>
-
               <span className="small-label">
                 {mode.toUpperCase()} TRAVEL
               </span>
 
-              <h2>
-                {currentMode.title}
-              </h2>
-
+              <h2>{currentMode.title}</h2>
             </div>
 
-            <p>
-              {currentMode.subtitle}
-            </p>
+            <p>{currentMode.subtitle}</p>
 
           </div>
 
@@ -510,9 +458,7 @@ function Home() {
             <button
               type="button"
               className={`location-field ${
-                locationType === "from"
-                  ? "focused"
-                  : ""
+                locationType === "from" ? "focused" : ""
               }`}
               onClick={() => {
                 setLocationType("from");
@@ -531,7 +477,6 @@ function Home() {
                 </div>
 
                 <div>
-
                   <strong>
                     {from || "Select location"}
                   </strong>
@@ -541,7 +486,6 @@ function Home() {
                       ? "Selected location"
                       : "City, station or airport"}
                   </small>
-
                 </div>
 
               </div>
@@ -564,9 +508,7 @@ function Home() {
             <button
               type="button"
               className={`location-field ${
-                locationType === "to"
-                  ? "focused"
-                  : ""
+                locationType === "to" ? "focused" : ""
               }`}
               onClick={() => {
                 setLocationType("to");
@@ -585,7 +527,6 @@ function Home() {
                 </div>
 
                 <div>
-
                   <strong>
                     {to || "Select destination"}
                   </strong>
@@ -595,7 +536,6 @@ function Home() {
                       ? "Selected destination"
                       : "City, station or station"}
                   </small>
-
                 </div>
 
               </div>
@@ -604,18 +544,14 @@ function Home() {
 
           </div>
 
-          {/* =====================================================
-              LOCATION POPUP
-          ====================================================== */}
+          {/* LOCATION POPUP */}
 
           {locationType && (
-
             <div className="location-popup">
 
               <div className="popup-header">
 
                 <div>
-
                   <strong>
                     {locationType === "from"
                       ? currentMode.fromLabel
@@ -625,7 +561,6 @@ function Home() {
                   <span>
                     Choose a city or travel location
                   </span>
-
                 </div>
 
                 <button
@@ -640,28 +575,20 @@ function Home() {
 
               </div>
 
-              {/* SEARCH */}
-
               <div className="location-input">
 
-                <span>
-                  ⌕
-                </span>
+                <span>⌕</span>
 
                 <input
                   autoFocus
                   value={locationSearch}
                   onChange={(event) =>
-                    setLocationSearch(
-                      event.target.value
-                    )
+                    setLocationSearch(event.target.value)
                   }
                   placeholder="Search city, station or airport"
                 />
 
               </div>
-
-              {/* CURRENT LOCATION */}
 
               <button
                 type="button"
@@ -674,7 +601,6 @@ function Home() {
                 </div>
 
                 <div>
-
                   <strong>
                     Use current location
                   </strong>
@@ -682,7 +608,6 @@ function Home() {
                   <span>
                     Use Hyderabad as boarding point
                   </span>
-
                 </div>
 
               </button>
@@ -691,49 +616,34 @@ function Home() {
                 POPULAR LOCATIONS
               </span>
 
-              {/* CITY LIST */}
-
               <div className="city-list">
 
                 {filteredCities.length > 0 ? (
-
                   filteredCities.map((city) => (
-
                     <button
                       type="button"
                       key={city}
-                      onClick={() =>
-                        selectCity(city)
-                      }
+                      onClick={() => selectCity(city)}
                     >
-
                       <span className="city-icon">
                         ●
                       </span>
 
                       {city}
-
                     </button>
-
                   ))
-
                 ) : (
-
                   <div className="no-location">
                     No locations found
                   </div>
-
                 )}
 
               </div>
 
             </div>
-
           )}
 
-          {/* =====================================================
-              TRAVEL DETAILS
-          ====================================================== */}
+          {/* TRAVEL DETAILS */}
 
           <div className="travel-details">
 
@@ -782,28 +692,20 @@ function Home() {
                   type="button"
                   onClick={() =>
                     setPassengers(
-                      Math.max(
-                        1,
-                        passengers - 1
-                      )
+                      Math.max(1, passengers - 1)
                     )
                   }
                 >
                   −
                 </button>
 
-                <strong>
-                  {passengers}
-                </strong>
+                <strong>{passengers}</strong>
 
                 <button
                   type="button"
                   onClick={() =>
                     setPassengers(
-                      Math.min(
-                        10,
-                        passengers + 1
-                      )
+                      Math.min(10, passengers + 1)
                     )
                   }
                 >
@@ -832,17 +734,13 @@ function Home() {
                 {currentMode.button}
               </span>
 
-              <strong>
-                →
-              </strong>
+              <strong>→</strong>
 
             </button>
 
           </div>
 
-          {/* =====================================================
-              SAFESEAT PREFERENCE
-          ====================================================== */}
+          {/* SAFESEAT PREFERENCE */}
 
           <div className="preference-section">
 
@@ -853,7 +751,6 @@ function Home() {
               </div>
 
               <div>
-
                 <strong>
                   SafeSeat Preference
                 </strong>
@@ -861,7 +758,6 @@ function Home() {
                 <span>
                   Choose who you prefer around you
                 </span>
-
               </div>
 
             </div>
@@ -873,13 +769,9 @@ function Home() {
               <button
                 type="button"
                 className={`preference-option ${
-                  preference === "none"
-                    ? "active"
-                    : ""
+                  preference === "none" ? "active" : ""
                 }`}
-                onClick={() =>
-                  setPreference("none")
-                }
+                onClick={() => setPreference("none")}
               >
 
                 <div className="preference-dot neutral">
@@ -887,15 +779,11 @@ function Home() {
                 </div>
 
                 <div>
-
-                  <strong>
-                    No preference
-                  </strong>
+                  <strong>No preference</strong>
 
                   <span>
                     Any available seat
                   </span>
-
                 </div>
 
               </button>
@@ -905,13 +793,9 @@ function Home() {
               <button
                 type="button"
                 className={`preference-option women ${
-                  preference === "women"
-                    ? "active"
-                    : ""
+                  preference === "women" ? "active" : ""
                 }`}
-                onClick={() =>
-                  setPreference("women")
-                }
+                onClick={() => setPreference("women")}
               >
 
                 <div className="preference-dot women-dot">
@@ -919,7 +803,6 @@ function Home() {
                 </div>
 
                 <div>
-
                   <strong>
                     Women surroundings
                   </strong>
@@ -927,7 +810,6 @@ function Home() {
                   <span>
                     Prefer women nearby
                   </span>
-
                 </div>
 
               </button>
@@ -937,13 +819,9 @@ function Home() {
               <button
                 type="button"
                 className={`preference-option men ${
-                  preference === "men"
-                    ? "active"
-                    : ""
+                  preference === "men" ? "active" : ""
                 }`}
-                onClick={() =>
-                  setPreference("men")
-                }
+                onClick={() => setPreference("men")}
               >
 
                 <div className="preference-dot men-dot">
@@ -951,7 +829,6 @@ function Home() {
                 </div>
 
                 <div>
-
                   <strong>
                     Men surroundings
                   </strong>
@@ -959,7 +836,6 @@ function Home() {
                   <span>
                     Prefer men nearby
                   </span>
-
                 </div>
 
               </button>
@@ -974,22 +850,18 @@ function Home() {
 
       {/* =====================================================
           POPULAR DESTINATIONS
-      ====================================================== */}
+      ===================================================== */}
 
       <section className="destination-section">
 
         <div className="section-heading">
 
           <div>
-
-            <span>
-              PLAN YOUR NEXT JOURNEY
-            </span>
+            <span>PLAN YOUR NEXT JOURNEY</span>
 
             <h2>
               Popular destinations
             </h2>
-
           </div>
 
           <p>
@@ -1000,13 +872,10 @@ function Home() {
 
         <div className="destination-grid">
 
-          {/* ROUTE 1 */}
-
           <button
             type="button"
             className="destination-card"
             onClick={() => {
-
               setFrom("Hyderabad");
               setTo("Bengaluru");
 
@@ -1014,7 +883,6 @@ function Home() {
                 top: 280,
                 behavior: "smooth",
               });
-
             }}
           >
 
@@ -1024,17 +892,11 @@ function Home() {
 
             <div className="destination-route">
 
-              <strong>
-                Hyderabad
-              </strong>
+              <strong>Hyderabad</strong>
 
-              <span>
-                →
-              </span>
+              <span>→</span>
 
-              <strong>
-                Bengaluru
-              </strong>
+              <strong>Bengaluru</strong>
 
             </div>
 
@@ -1044,13 +906,10 @@ function Home() {
 
           </button>
 
-          {/* ROUTE 2 */}
-
           <button
             type="button"
             className="destination-card"
             onClick={() => {
-
               setFrom("Hyderabad");
               setTo("Vijayawada");
 
@@ -1058,7 +917,6 @@ function Home() {
                 top: 280,
                 behavior: "smooth",
               });
-
             }}
           >
 
@@ -1068,17 +926,11 @@ function Home() {
 
             <div className="destination-route">
 
-              <strong>
-                Hyderabad
-              </strong>
+              <strong>Hyderabad</strong>
 
-              <span>
-                →
-              </span>
+              <span>→</span>
 
-              <strong>
-                Vijayawada
-              </strong>
+              <strong>Vijayawada</strong>
 
             </div>
 
@@ -1088,13 +940,10 @@ function Home() {
 
           </button>
 
-          {/* ROUTE 3 */}
-
           <button
             type="button"
             className="destination-card"
             onClick={() => {
-
               setFrom("Chennai");
               setTo("Bengaluru");
 
@@ -1102,7 +951,6 @@ function Home() {
                 top: 280,
                 behavior: "smooth",
               });
-
             }}
           >
 
@@ -1112,17 +960,11 @@ function Home() {
 
             <div className="destination-route">
 
-              <strong>
-                Chennai
-              </strong>
+              <strong>Chennai</strong>
 
-              <span>
-                →
-              </span>
+              <span>→</span>
 
-              <strong>
-                Bengaluru
-              </strong>
+              <strong>Bengaluru</strong>
 
             </div>
 
@@ -1138,22 +980,18 @@ function Home() {
 
       {/* =====================================================
           WHY SAFESEAT
-      ====================================================== */}
+      ===================================================== */}
 
       <section className="why-section">
 
         <div className="why-intro">
 
-          <span>
-            WHY SAFESEAT
-          </span>
+          <span>WHY SAFESEAT</span>
 
           <h2>
             Travel with
             <br />
-            <em>
-              more choice.
-            </em>
+            <em>more choice.</em>
           </h2>
 
           <p>
@@ -1165,8 +1003,6 @@ function Home() {
         </div>
 
         <div className="why-grid">
-
-          {/* CARD 1 */}
 
           <article className="why-card">
 
@@ -1189,8 +1025,6 @@ function Home() {
 
           </article>
 
-          {/* CARD 2 */}
-
           <article className="why-card">
 
             <div className="card-number">
@@ -1211,8 +1045,6 @@ function Home() {
             </p>
 
           </article>
-
-          {/* CARD 3 */}
 
           <article className="why-card">
 

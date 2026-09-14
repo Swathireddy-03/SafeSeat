@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa";
 import "./AdminDashboard.css";
 import Footer from "../components/Footer";
-const API_BASE = "https://safeseat-1.onrender.com";
+const API_BASE = "https://safeseat.onrender.com";
 
 function AdminDashboard() {
   const navigate = useNavigate();
