@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 // BACKEND URL
 // ============================================
 
-const API_BASE_URL = "https://safeseat-1.onrender.com";
+const API_BASE_URL = "https://safeseat.onrender.com";
 
 // ============================================
 // GST

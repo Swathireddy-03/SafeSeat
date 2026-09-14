@@ -1,8 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MyTrips.css";
 import Footer from "../components/Footer";
+
+const API_BASE_URL = "https://safeseat.onrender.com";
 
 function MyTrips() {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ function MyTrips() {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState("all");
   const [selectedTrip, setSelectedTrip] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     loadBookings();
@@ -32,21 +35,105 @@ function MyTrips() {
   }, []);
 
   /* =====================================================
-      LOAD BOOKINGS
+      LOAD BOOKINGS FROM BACKEND
   ===================================================== */
 
-  const loadBookings = () => {
+  const loadBookings = async () => {
     try {
-      const stored = JSON.parse(
-        localStorage.getItem("safeSeatBookings") || "[]"
+      setLoading(true);
+      setError("");
+
+      const userId = localStorage.getItem(
+        "safeSeatUserId"
       );
 
-      setBookings(
-        Array.isArray(stored) ? stored : []
+      if (!userId) {
+        console.error("SafeSeat user ID not found.");
+
+        setBookings([]);
+        setError(
+          "Please login again to view your trips."
+        );
+
+        setLoading(false);
+        return;
+      }
+
+      console.log(
+        "Loading bookings for user:",
+        userId
       );
+
+      const response = await fetch(
+        `${API_BASE_URL}/api/bookings/user/${userId}`
+      );
+
+      const data = await response.json();
+
+      console.log(
+        "MY TRIPS BACKEND RESPONSE:",
+        data
+      );
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message ||
+            "Failed to load your bookings."
+        );
+      }
+
+      const backendBookings =
+        Array.isArray(data.bookings)
+          ? data.bookings
+          : [];
+
+      setBookings(backendBookings);
+
+      /*
+        Keep localStorage synchronized.
+        This is only a local copy now.
+        The backend/database is the main source.
+      */
+      localStorage.setItem(
+        "safeSeatBookings",
+        JSON.stringify(backendBookings)
+      );
+
     } catch (error) {
-      console.error("Unable to load trips:", error);
-      setBookings([]);
+      console.error(
+        "Unable to load trips:",
+        error
+      );
+
+      setError(
+        error.message ||
+          "Unable to load your trips."
+      );
+
+      /*
+        Fallback to localStorage if backend
+        temporarily cannot be reached.
+      */
+      try {
+        const stored = JSON.parse(
+          localStorage.getItem(
+            "safeSeatBookings"
+          ) || "[]"
+        );
+
+        if (Array.isArray(stored)) {
+          setBookings(stored);
+        }
+      } catch (storageError) {
+        console.error(
+          "Local booking fallback failed:",
+          storageError
+        );
+
+        setBookings([]);
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -56,6 +143,7 @@ function MyTrips() {
 
   const getTransport = (trip) => {
     return (
+      trip.transportType ||
       trip.transportMode ||
       trip.mode ||
       trip.type ||
@@ -82,6 +170,7 @@ function MyTrips() {
   const getTrainName = (trip) => {
     return (
       trip.train?.name ||
+      trip.trainName ||
       trip.train_name ||
       trip.name ||
       "SafeSeat Express"
@@ -91,7 +180,29 @@ function MyTrips() {
   const getTrainNumber = (trip) => {
     return (
       trip.train?.number ||
+      trip.trainNumber ||
       trip.train_number ||
+      "N/A"
+    );
+  };
+
+  /* =====================================================
+      BUS
+  ===================================================== */
+
+  const getBusName = (trip) => {
+    return (
+      trip.busName ||
+      trip.bus_name ||
+      trip.bus?.name ||
+      "SafeSeat Bus"
+    );
+  };
+
+  const getBusNumber = (trip) => {
+    return (
+      trip.busNumber ||
+      trip.bus_number ||
       "N/A"
     );
   };
@@ -105,6 +216,7 @@ function MyTrips() {
       trip.from ||
       trip.source ||
       trip.fromCity ||
+      trip.from_city ||
       "Origin"
     );
   };
@@ -114,7 +226,36 @@ function MyTrips() {
       trip.to ||
       trip.destination ||
       trip.toCity ||
+      trip.to_city ||
       "Destination"
+    );
+  };
+
+  /* =====================================================
+      DEPARTURE
+  ===================================================== */
+
+  const getDeparture = (trip) => {
+    return (
+      trip.departure ||
+      trip.departureTime ||
+      trip.departure_time ||
+      trip.train?.departure ||
+      "--:--"
+    );
+  };
+
+  /* =====================================================
+      ARRIVAL
+  ===================================================== */
+
+  const getArrival = (trip) => {
+    return (
+      trip.arrival ||
+      trip.arrivalTime ||
+      trip.arrival_time ||
+      trip.train?.arrival ||
+      "--:--"
     );
   };
 
@@ -127,6 +268,7 @@ function MyTrips() {
       trip.formattedDate ||
       trip.travelDate ||
       trip.journeyDate ||
+      trip.journey_date ||
       trip.date ||
       "N/A"
     );
@@ -150,7 +292,8 @@ function MyTrips() {
     ) {
       return trip.passengers
         .map((passenger) => {
-          const seat = passenger.seat || "N/A";
+          const seat =
+            passenger.seat || "N/A";
 
           if (trip.coach) {
             return `${trip.coach}-${seat}`;
@@ -161,7 +304,18 @@ function MyTrips() {
         .join(", ");
     }
 
-    return trip.seats || "N/A";
+    /*
+      Backend currently stores the number
+      of seats in `seats`.
+    */
+    if (
+      trip.seats !== undefined &&
+      trip.seats !== null
+    ) {
+      return String(trip.seats);
+    }
+
+    return "N/A";
   };
 
   /* =====================================================
@@ -173,8 +327,20 @@ function MyTrips() {
       return trip.passengerCount;
     }
 
-    if (Array.isArray(trip.passengers)) {
+    if (
+      Array.isArray(trip.passengers) &&
+      trip.passengers.length > 0
+    ) {
       return trip.passengers.length;
+    }
+
+    /*
+      Backend stores the seat count.
+      For the current booking structure,
+      use it as the passenger count.
+    */
+    if (trip.seats) {
+      return Number(trip.seats);
     }
 
     return 1;
@@ -197,25 +363,28 @@ function MyTrips() {
       FILTER
   ===================================================== */
 
-  const filteredBookings = bookings.filter((trip) => {
-    const status = getStatus(trip).toLowerCase();
+  const filteredBookings = bookings.filter(
+    (trip) => {
+      const status =
+        getStatus(trip).toLowerCase();
 
-    if (filter === "confirmed") {
-      return status === "confirmed";
+      if (filter === "confirmed") {
+        return status === "confirmed";
+      }
+
+      if (filter === "cancelled") {
+        return status === "cancelled";
+      }
+
+      return true;
     }
-
-    if (filter === "cancelled") {
-      return status === "cancelled";
-    }
-
-    return true;
-  });
+  );
 
   /* =====================================================
       CANCEL TRIP
   ===================================================== */
 
-  const cancelTrip = (bookingId) => {
+  const cancelTrip = async (bookingId) => {
     if (!bookingId) {
       alert("Booking ID not found.");
       return;
@@ -229,50 +398,54 @@ function MyTrips() {
       return;
     }
 
-    const updatedBookings = bookings.map((trip) => {
-      if (trip.bookingId === bookingId) {
-        return {
-          ...trip,
-          bookingStatus: "Cancelled",
-          refundStatus: null,
-        };
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/api/bookings/${bookingId}/cancel`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(
+        "CANCEL BOOKING RESPONSE:",
+        data
+      );
+
+      if (!response.ok || !data.success) {
+        throw new Error(
+          data.message ||
+            "Failed to cancel booking."
+        );
       }
 
-      return trip;
-    });
+      /*
+        Reload from backend so the status
+        comes directly from MySQL.
+      */
+      await loadBookings();
 
-    setBookings(updatedBookings);
+      setSelectedTrip(null);
 
-    localStorage.setItem(
-      "safeSeatBookings",
-      JSON.stringify(updatedBookings)
-    );
-
-    const currentBooking = updatedBookings.find(
-      (trip) => trip.bookingId === bookingId
-    );
-
-    if (currentBooking) {
-      localStorage.setItem(
-        "safeSeatBooking",
-        JSON.stringify(currentBooking)
+      alert(
+        "Trip cancelled successfully. You can now request a refund."
       );
 
-      sessionStorage.setItem(
-        "safeSeatBooking",
-        JSON.stringify(currentBooking)
+    } catch (error) {
+      console.error(
+        "CANCEL TRIP ERROR:",
+        error
+      );
+
+      alert(
+        error.message ||
+          "Unable to cancel the trip."
       );
     }
-
-    window.dispatchEvent(
-      new Event("safeSeatBookingUpdated")
-    );
-
-    setSelectedTrip(null);
-
-    alert(
-      "Trip cancelled successfully. You can now request a refund."
-    );
   };
 
   /* =====================================================
@@ -293,18 +466,23 @@ function MyTrips() {
       return;
     }
 
-    const updatedBookings = bookings.map((trip) => {
-      if (trip.bookingId === bookingId) {
-        return {
-          ...trip,
-          refundStatus: "Processing",
-          refundRequestedAt:
-            new Date().toISOString(),
-        };
-      }
+    const updatedBookings = bookings.map(
+      (trip) => {
+        if (
+          trip.bookingId === bookingId ||
+          trip.booking_id === bookingId
+        ) {
+          return {
+            ...trip,
+            refundStatus: "Processing",
+            refundRequestedAt:
+              new Date().toISOString(),
+          };
+        }
 
-      return trip;
-    });
+        return trip;
+      }
+    );
 
     setBookings(updatedBookings);
 
@@ -313,9 +491,12 @@ function MyTrips() {
       JSON.stringify(updatedBookings)
     );
 
-    const currentBooking = updatedBookings.find(
-      (trip) => trip.bookingId === bookingId
-    );
+    const currentBooking =
+      updatedBookings.find(
+        (trip) =>
+          trip.bookingId === bookingId ||
+          trip.booking_id === bookingId
+      );
 
     if (currentBooking) {
       localStorage.setItem(
@@ -327,13 +508,13 @@ function MyTrips() {
         "safeSeatBooking",
         JSON.stringify(currentBooking)
       );
+
+      setSelectedTrip(currentBooking);
     }
 
     window.dispatchEvent(
       new Event("safeSeatBookingUpdated")
     );
-
-    setSelectedTrip(null);
 
     alert(
       "Refund request submitted successfully. Your refund is being processed."
@@ -347,6 +528,49 @@ function MyTrips() {
   const getRefundStatus = (trip) => {
     return trip.refundStatus || "Not Requested";
   };
+
+  /* =====================================================
+      LOADING
+  ===================================================== */
+
+  if (loading) {
+    return (
+      <div className="my-trips-page">
+
+        <main className="my-trips-container">
+
+          <button
+            type="button"
+            className="my-trips-back-home"
+            onClick={() => navigate("/home")}
+          >
+            ← Back to Home
+          </button>
+
+          <section className="empty-trips">
+
+            <div className="empty-trip-icon">
+              🎫
+            </div>
+
+            <h2>
+              Loading your trips...
+            </h2>
+
+            <p>
+              Please wait while we fetch your
+              bookings.
+            </p>
+
+          </section>
+
+        </main>
+
+        <Footer />
+
+      </div>
+    );
+  }
 
   /* =====================================================
       RENDER
@@ -401,6 +625,26 @@ function MyTrips() {
         </section>
 
         {/* =================================================
+            ERROR
+        ================================================= */}
+
+        {error && (
+          <div
+            style={{
+              margin: "20px 0",
+              padding: "14px 18px",
+              borderRadius: "12px",
+              background: "#fff1f2",
+              color: "#b42318",
+              border: "1px solid #fecdd3",
+              fontSize: "14px",
+            }}
+          >
+            {error}
+          </div>
+        )}
+
+        {/* =================================================
             CONTROLS
         ================================================= */}
 
@@ -437,7 +681,9 @@ function MyTrips() {
                   ? "filter-active"
                   : ""
               }
-              onClick={() => setFilter("all")}
+              onClick={() =>
+                setFilter("all")
+              }
             >
               All Trips
             </button>
@@ -546,6 +792,8 @@ function MyTrips() {
                     }`}
                     key={
                       trip.bookingId ||
+                      trip.booking_id ||
+                      trip.id ||
                       index
                     }
                   >
@@ -580,10 +828,12 @@ function MyTrips() {
 
                           <h2>
                             {isTrain
-                              ? getTrainName(trip)
-                              : trip.busName ||
-                                trip.bus?.name ||
-                                "SafeSeat Bus"}
+                              ? getTrainName(
+                                  trip
+                                )
+                              : getBusName(
+                                  trip
+                                )}
                           </h2>
 
                           <p>
@@ -591,8 +841,9 @@ function MyTrips() {
                               ? `Train ${getTrainNumber(
                                   trip
                                 )}`
-                              : trip.busNumber ||
-                                "SafeSeat"}
+                              : getBusNumber(
+                                  trip
+                                )}
                           </p>
 
                         </div>
@@ -624,9 +875,9 @@ function MyTrips() {
                       <div className="trip-location">
 
                         <strong>
-                          {trip.departure ||
-                            trip.train?.departure ||
-                            "--:--"}
+                          {getDeparture(
+                            trip
+                          )}
                         </strong>
 
                         <span>
@@ -654,9 +905,7 @@ function MyTrips() {
                       <div className="trip-location destination">
 
                         <strong>
-                          {trip.arrival ||
-                            trip.train?.arrival ||
-                            "--:--"}
+                          {getArrival(trip)}
                         </strong>
 
                         <span>
@@ -744,6 +993,7 @@ function MyTrips() {
 
                         <strong>
                           {trip.bookingId ||
+                            trip.booking_id ||
                             "N/A"}
                         </strong>
 
@@ -774,7 +1024,8 @@ function MyTrips() {
                             className="cancel-trip-btn"
                             onClick={() =>
                               cancelTrip(
-                                trip.bookingId
+                                trip.bookingId ||
+                                  trip.booking_id
                               )
                             }
                           >
@@ -793,7 +1044,8 @@ function MyTrips() {
                               className="refund-btn"
                               onClick={() =>
                                 requestRefund(
-                                  trip.bookingId
+                                  trip.bookingId ||
+                                    trip.booking_id
                                 )
                               }
                             >
@@ -880,9 +1132,15 @@ function MyTrips() {
                 </span>
 
                 <h2>
-                  {getTrainName(
+                  {getTransport(
                     selectedTrip
-                  )}
+                  ) === "train"
+                    ? getTrainName(
+                        selectedTrip
+                      )
+                    : getBusName(
+                        selectedTrip
+                      )}
                 </h2>
 
               </div>
@@ -925,10 +1183,9 @@ function MyTrips() {
                 <div>
 
                   <strong>
-                    {selectedTrip.departure ||
-                      selectedTrip.train
-                        ?.departure ||
-                      "--:--"}
+                    {getDeparture(
+                      selectedTrip
+                    )}
                   </strong>
 
                   <span>
@@ -946,10 +1203,9 @@ function MyTrips() {
                 <div>
 
                   <strong>
-                    {selectedTrip.arrival ||
-                      selectedTrip.train
-                        ?.arrival ||
-                      "--:--"}
+                    {getArrival(
+                      selectedTrip
+                    )}
                   </strong>
 
                   <span>
@@ -1095,6 +1351,7 @@ function MyTrips() {
                       </div>
 
                     )
+
                   )
 
                 ) : (
@@ -1108,11 +1365,22 @@ function MyTrips() {
                     <div className="passenger-info">
 
                       <strong>
-                        Passenger
+                        {selectedTrip.passengerName ||
+                          "Passenger"}
                       </strong>
 
                       <span>
-                        Passenger details
+                        {selectedTrip.passengerGender ===
+                        "men"
+                          ? "Male"
+                          : selectedTrip.passengerGender ===
+                            "women"
+                          ? "Female"
+                          : "Passenger details"}
+                        {" • "}
+                        Age{" "}
+                        {selectedTrip.passengerAge ||
+                          "N/A"}
                       </span>
 
                     </div>
@@ -1145,6 +1413,7 @@ function MyTrips() {
 
                   <strong>
                     {selectedTrip.bookingId ||
+                      selectedTrip.booking_id ||
                       "N/A"}
                   </strong>
 
@@ -1158,6 +1427,7 @@ function MyTrips() {
 
                   <strong>
                     {selectedTrip.paymentMethod ||
+                      selectedTrip.payment_method ||
                       "N/A"}
                   </strong>
 
@@ -1172,6 +1442,7 @@ function MyTrips() {
                   <strong className="payment-paid">
 
                     {selectedTrip.paymentStatus ||
+                      selectedTrip.payment_status ||
                       "Paid"}
 
                   </strong>
@@ -1234,7 +1505,8 @@ function MyTrips() {
                   className="ticket-cancel-btn"
                   onClick={() =>
                     cancelTrip(
-                      selectedTrip.bookingId
+                      selectedTrip.bookingId ||
+                        selectedTrip.booking_id
                     )
                   }
                 >
@@ -1256,7 +1528,8 @@ function MyTrips() {
                   className="ticket-refund-btn"
                   onClick={() =>
                     requestRefund(
-                      selectedTrip.bookingId
+                      selectedTrip.bookingId ||
+                        selectedTrip.booking_id
                     )
                   }
                 >
@@ -1310,4 +1583,3 @@ function MyTrips() {
 }
 
 export default MyTrips;
-

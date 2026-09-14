@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Auth.css";
-
-const API_BASE_URL = "https://safeseat-1.onrender.com";
-
+const API_BASE_URL = "https://safeseat.onrender.com";
 function Login() {
   const navigate = useNavigate();
 

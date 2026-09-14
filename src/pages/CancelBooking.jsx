@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./CancelBooking.css";
 
-const API_BASE_URL = "https://safeseat-1.onrender.com";
-
+const API_BASE_URL = "https://safeseat.onrender.com";
 function CancelBooking() {
   const navigate = useNavigate();
   const location = useLocation();
