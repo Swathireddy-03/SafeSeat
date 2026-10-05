@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Payment.css";
@@ -114,11 +113,14 @@ function Payment() {
   // ============================================
 
   const formattedDate = travelDate
-    ? new Date(travelDate).toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
+    ? new Date(travelDate).toLocaleDateString(
+        "en-IN",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        }
+      )
     : "Not selected";
 
   // ============================================
@@ -126,9 +128,7 @@ function Payment() {
   // ============================================
 
   const validatePayment = () => {
-
     if (paymentMethod === "UPI") {
-
       if (!upiApp) {
         setError(
           "Please select Google Pay or PhonePe."
@@ -141,12 +141,10 @@ function Payment() {
     }
 
     if (paymentMethod === "Card") {
-
       const cleanCard =
         cardNumber.replace(/\s/g, "");
 
       if (cleanCard.length !== 16) {
-
         setError(
           "Please enter a valid 16-digit card number."
         );
@@ -155,7 +153,6 @@ function Payment() {
       }
 
       if (!cardName.trim()) {
-
         setError(
           "Please enter the card holder name."
         );
@@ -164,7 +161,6 @@ function Payment() {
       }
 
       if (!/^\d{2}\/\d{2}$/.test(expiry)) {
-
         setError(
           "Enter expiry date in MM/YY format."
         );
@@ -173,7 +169,6 @@ function Payment() {
       }
 
       if (!/^\d{3,4}$/.test(cvv)) {
-
         setError(
           "Please enter a valid CVV."
         );
@@ -185,9 +180,7 @@ function Payment() {
     }
 
     if (paymentMethod === "Netbanking") {
-
       if (!bank) {
-
         setError(
           "Please select your bank."
         );
@@ -206,8 +199,11 @@ function Payment() {
   // ============================================
 
   const handlePayment = async () => {
-
     setError("");
+
+    // ============================================
+    // BASIC VALIDATION
+    // ============================================
 
     if (!bus.id) {
       setError("Bus information is missing.");
@@ -220,12 +216,16 @@ function Payment() {
     }
 
     if (!passengers.length) {
-      setError("Passenger details are missing.");
+      setError(
+        "Passenger details are missing."
+      );
       return;
     }
 
     if (!selectedSeats.length) {
-      setError("Please select at least one seat.");
+      setError(
+        "Please select at least one seat."
+      );
       return;
     }
 
@@ -239,23 +239,66 @@ function Payment() {
     }
 
     try {
-
       setProcessing(true);
 
       // ============================================
-      // GET USER ID
+      // GET CURRENT SAFESEAT USER
       // ============================================
 
-      const savedUser =
-        JSON.parse(
-          localStorage.getItem("busmateUser") || "null"
+      const savedUser = JSON.parse(
+        localStorage.getItem("safeSeatUser") ||
+          "null"
+      );
+
+      const storedUserId =
+        localStorage.getItem(
+          "safeSeatUserId"
         );
 
-      const userId =
-        savedUser?.id ||
-        savedUser?.userId ||
-        localStorage.getItem("userId") ||
-        1;
+      const userId = Number(
+        storedUserId ||
+          savedUser?.id ||
+          savedUser?.userId ||
+          0
+      );
+
+      console.log(
+        "===================================="
+      );
+
+      console.log(
+        "SafeSeat logged-in user:",
+        savedUser
+      );
+
+      console.log(
+        "SafeSeat stored user ID:",
+        storedUserId
+      );
+
+      console.log(
+        "SafeSeat final user ID:",
+        userId
+      );
+
+      console.log(
+        "===================================="
+      );
+
+      // ============================================
+      // IMPORTANT
+      // NEVER DEFAULT TO USER ID 1
+      // ============================================
+
+      if (!userId) {
+        setError(
+          "User session not found. Please login again."
+        );
+
+        setProcessing(false);
+
+        return;
+      }
 
       // ============================================
       // PAYMENT METHOD
@@ -271,15 +314,19 @@ function Payment() {
       // ============================================
 
       const bookingPayload = {
+        // CURRENT LOGGED-IN USER
+        userId: userId,
 
-        userId: Number(userId),
-
+        // BUS
         busId: Number(bus.id),
 
+        // JOURNEY
         journeyDate: travelDate,
 
+        // SEATS
         seats: selectedSeats,
 
+        // PASSENGER
         passengerName:
           passengers[0]?.name ||
           passengers[0]?.passengerName ||
@@ -295,35 +342,56 @@ function Payment() {
           passengers[0]?.passengerGender ||
           "",
 
-        // ============================================
+        // ==========================================
         // FARE
-        // ============================================
+        // ==========================================
 
         baseAmount: Number(baseFare),
 
-        // ============================================
+        // ==========================================
         // GST
-        // ============================================
+        // ==========================================
 
         gstRate: 18,
 
         gstAmount: Number(gstAmount),
 
-        // ============================================
-        // FINAL AMOUNT INCLUDING GST
-        // ============================================
+        // ==========================================
+        // FINAL AMOUNT
+        // ==========================================
 
         amount: Number(totalAmount),
 
         totalAmount: Number(totalAmount),
 
+        // ==========================================
+        // PAYMENT
+        // ==========================================
+
         paymentMethod:
           finalPaymentMethod,
+
+        // ==========================================
+        // TRANSPORT TYPE
+        // ==========================================
+
+        transportType: "bus",
       };
 
       console.log(
-        "Sending booking with GST:",
+        "===================================="
+      );
+
+      console.log(
+        "SENDING BUS BOOKING:"
+      );
+
+      console.log(
         bookingPayload
+      );
+
+      console.log(
+        "===================================="
       );
 
       // ============================================
@@ -339,24 +407,42 @@ function Payment() {
             "Content-Type": "application/json",
           },
 
-          body: JSON.stringify(bookingPayload),
+          body: JSON.stringify(
+            bookingPayload
+          ),
         }
       );
 
-      const result = await response.json();
+      const result =
+        await response.json();
 
       console.log(
-        "Booking response:",
+        "===================================="
+      );
+
+      console.log(
+        "BUS BOOKING RESPONSE:",
         result
       );
 
-      if (!response.ok) {
+      console.log(
+        "===================================="
+      );
 
+      // ============================================
+      // HANDLE API ERROR
+      // ============================================
+
+      if (!response.ok) {
         throw new Error(
           result.message ||
             "Payment/booking failed."
         );
       }
+
+      // ============================================
+      // GET BOOKING ID
+      // ============================================
 
       const bookingId =
         result.bookingId ||
@@ -365,7 +451,6 @@ function Payment() {
         result.booking?.id;
 
       if (!bookingId) {
-
         throw new Error(
           "Booking created but booking ID was not received."
         );
@@ -376,9 +461,12 @@ function Payment() {
       // ============================================
 
       const finalBooking = {
-
         ...booking,
 
+        // USER
+        userId: userId,
+
+        // BOOKING ID
         bookingId: bookingId,
 
         databaseId:
@@ -386,34 +474,35 @@ function Payment() {
           result.booking?.id ||
           bookingId,
 
-        bookingResult:
-          result,
+        // API RESULT
+        bookingResult: result,
 
-        bus,
+        // BUS
+        bus: bus,
 
-        passengers,
+        // PASSENGERS
+        passengers: passengers,
 
-        seats:
-          selectedSeats,
+        // SEATS
+        seats: selectedSeats,
 
-        selectedSeats,
+        selectedSeats: selectedSeats,
 
-        from,
+        // ROUTE
+        from: from,
 
-        to,
+        to: to,
 
-        travelDate,
+        // DATE
+        travelDate: travelDate,
 
-        journeyDate:
-          travelDate,
+        journeyDate: travelDate,
 
+        // PAYMENT
         paymentMethod:
           finalPaymentMethod,
 
-        // ============================================
-        // GST DETAILS
-        // ============================================
-
+        // FARE
         baseAmount:
           Number(baseFare),
 
@@ -425,12 +514,15 @@ function Payment() {
         totalAmount:
           Number(totalAmount),
 
-        paymentStatus:
-          "Paid",
+        // STATUS
+        paymentStatus: "Paid",
 
-        bookingStatus:
-          "Confirmed",
+        bookingStatus: "Confirmed",
 
+        // TRANSPORT
+        transportType: "bus",
+
+        // TIME
         bookedAt:
           new Date().toISOString(),
       };
@@ -441,7 +533,9 @@ function Payment() {
 
       sessionStorage.setItem(
         "safeSeatBooking",
-        JSON.stringify(finalBooking)
+        JSON.stringify(
+          finalBooking
+        )
       );
 
       // ============================================
@@ -455,14 +549,35 @@ function Payment() {
           ) || "[]"
         );
 
-      existingBookings.push(
+      // ============================================
+      // PREVENT DUPLICATE LOCAL BOOKING
+      // ============================================
+
+      const filteredBookings =
+        existingBookings.filter(
+          (item) =>
+            item.bookingId !==
+            bookingId
+        );
+
+      filteredBookings.push(
         finalBooking
       );
 
       localStorage.setItem(
         "safeSeatBookings",
         JSON.stringify(
-          existingBookings
+          filteredBookings
+        )
+      );
+
+      // ============================================
+      // NOTIFY MY TRIPS
+      // ============================================
+
+      window.dispatchEvent(
+        new Event(
+          "safeSeatBookingUpdated"
         )
       );
 
@@ -476,9 +591,7 @@ function Payment() {
           state: finalBooking,
         }
       );
-
     } catch (err) {
-
       console.error(
         "Payment error:",
         err
@@ -488,11 +601,8 @@ function Payment() {
         err.message ||
           "Something went wrong while processing the payment."
       );
-
     } finally {
-
       setProcessing(false);
-
     }
   };
 
@@ -510,14 +620,19 @@ function Payment() {
 
           <div
             className="payment-logo"
-            onClick={() => navigate("/")}
+            onClick={() =>
+              navigate("/")
+            }
           >
-            Safe<span>Seat</span>
+            Safe
+            <span>Seat</span>
           </div>
 
           <button
             className="back-btn"
-            onClick={() => navigate(-1)}
+            onClick={() =>
+              navigate(-1)
+            }
           >
             ← Back
           </button>
@@ -589,16 +704,17 @@ function Payment() {
                 {/* UPI */}
 
                 <button
+                  type="button"
                   className={
                     paymentMethod === "UPI"
                       ? "payment-method active"
                       : "payment-method"
                   }
                   onClick={() => {
-
-                    setPaymentMethod("UPI");
+                    setPaymentMethod(
+                      "UPI"
+                    );
                     setError("");
-
                   }}
                 >
 
@@ -623,16 +739,17 @@ function Payment() {
                 {/* CARD */}
 
                 <button
+                  type="button"
                   className={
                     paymentMethod === "Card"
                       ? "payment-method active"
                       : "payment-method"
                   }
                   onClick={() => {
-
-                    setPaymentMethod("Card");
+                    setPaymentMethod(
+                      "Card"
+                    );
                     setError("");
-
                   }}
                 >
 
@@ -657,19 +774,18 @@ function Payment() {
                 {/* NET BANKING */}
 
                 <button
+                  type="button"
                   className={
-                    paymentMethod === "Netbanking"
+                    paymentMethod ===
+                    "Netbanking"
                       ? "payment-method active"
                       : "payment-method"
                   }
                   onClick={() => {
-
                     setPaymentMethod(
                       "Netbanking"
                     );
-
                     setError("");
-
                   }}
                 >
 
@@ -693,11 +809,10 @@ function Payment() {
 
               </div>
 
-              {/* ============================================
-                  UPI
-              ============================================ */}
+              {/* UPI */}
 
-              {paymentMethod === "UPI" && (
+              {paymentMethod ===
+                "UPI" && (
 
                 <div className="payment-form">
 
@@ -706,8 +821,8 @@ function Payment() {
                   </h3>
 
                   <p className="payment-info">
-                    Choose your preferred UPI app
-                    to continue.
+                    Choose your preferred
+                    UPI app to continue.
                   </p>
 
                   <div className="upi-apps">
@@ -717,18 +832,16 @@ function Payment() {
                     <button
                       type="button"
                       className={
-                        upiApp === "Google Pay"
+                        upiApp ===
+                        "Google Pay"
                           ? "upi-app active"
                           : "upi-app"
                       }
                       onClick={() => {
-
                         setUpiApp(
                           "Google Pay"
                         );
-
                         setError("");
-
                       }}
                     >
 
@@ -764,18 +877,16 @@ function Payment() {
                     <button
                       type="button"
                       className={
-                        upiApp === "PhonePe"
+                        upiApp ===
+                        "PhonePe"
                           ? "upi-app active"
                           : "upi-app"
                       }
                       onClick={() => {
-
                         setUpiApp(
                           "PhonePe"
                         );
-
                         setError("");
-
                       }}
                     >
 
@@ -809,19 +920,17 @@ function Payment() {
                   </div>
 
                   <div className="secure-payment-note">
-
-                    🔒 Your payment information is secure
-
+                    🔒 Your payment information
+                    is secure
                   </div>
 
                 </div>
               )}
 
-              {/* ============================================
-                  CARD
-              ============================================ */}
+              {/* CARD */}
 
-              {paymentMethod === "Card" && (
+              {paymentMethod ===
+                "Card" && (
 
                 <div className="payment-form">
 
@@ -837,21 +946,27 @@ function Payment() {
                       maxLength="19"
                       value={cardNumber}
                       onChange={(e) => {
-
                         const value =
                           e.target.value
-                            .replace(/\D/g, "")
-                            .slice(0, 16);
+                            .replace(
+                              /\D/g,
+                              ""
+                            )
+                            .slice(
+                              0,
+                              16
+                            );
 
                         const formatted =
                           value.match(
                             /.{1,4}/g
-                          )?.join(" ") || "";
+                          )?.join(
+                            " "
+                          ) || "";
 
                         setCardNumber(
                           formatted
                         );
-
                       }}
                     />
 
@@ -890,27 +1005,35 @@ function Payment() {
                         maxLength="5"
                         value={expiry}
                         onChange={(e) => {
-
                           let value =
                             e.target.value
-                              .replace(/\D/g, "")
-                              .slice(0, 4);
+                              .replace(
+                                /\D/g,
+                                ""
+                              )
+                              .slice(
+                                0,
+                                4
+                              );
 
                           if (
-                            value.length > 2
+                            value.length >
+                            2
                           ) {
-
                             value =
-                              value.slice(0, 2) +
+                              value.slice(
+                                0,
+                                2
+                              ) +
                               "/" +
-                              value.slice(2);
-
+                              value.slice(
+                                2
+                              );
                           }
 
                           setExpiry(
                             value
                           );
-
                         }}
                       />
 
@@ -930,8 +1053,14 @@ function Payment() {
                         onChange={(e) =>
                           setCvv(
                             e.target.value
-                              .replace(/\D/g, "")
-                              .slice(0, 4)
+                              .replace(
+                                /\D/g,
+                                ""
+                              )
+                              .slice(
+                                0,
+                                4
+                              )
                           )
                         }
                       />
@@ -943,11 +1072,10 @@ function Payment() {
                 </div>
               )}
 
-              {/* ============================================
-                  NET BANKING
-              ============================================ */}
+              {/* NET BANKING */}
 
-              {paymentMethod === "Netbanking" && (
+              {paymentMethod ===
+                "Netbanking" && (
 
                 <div className="payment-form">
 
@@ -1000,36 +1128,35 @@ function Payment() {
               {/* ERROR */}
 
               {error && (
-
                 <div className="payment-error">
                   ⚠️ {error}
                 </div>
-
               )}
 
               {/* PAY BUTTON */}
 
               <button
+                type="button"
                 className="pay-button"
-                onClick={handlePayment}
+                onClick={
+                  handlePayment
+                }
                 disabled={processing}
               >
-
                 {processing
                   ? "Processing..."
                   : `Pay ₹${Number(
                       totalAmount
-                    ).toLocaleString("en-IN")}`}
-
+                    ).toLocaleString(
+                      "en-IN"
+                    )}`}
               </button>
 
             </div>
 
           </div>
 
-          {/* ============================================
-              BOOKING SUMMARY
-          ============================================ */}
+          {/* BOOKING SUMMARY */}
 
           <div className="payment-summary">
 
@@ -1047,6 +1174,7 @@ function Payment() {
 
               <span>
                 {bus.busType ||
+                  bus.bus_type ||
                   "Bus"}
               </span>
 
@@ -1105,7 +1233,9 @@ function Payment() {
                 </span>
 
                 <strong>
-                  {selectedSeats.join(", ")}
+                  {selectedSeats.join(
+                    ", "
+                  )}
                 </strong>
 
               </div>
@@ -1124,9 +1254,7 @@ function Payment() {
 
             </div>
 
-            {/* ============================================
-                TICKET FARE
-            ============================================ */}
+            {/* TICKET FARE */}
 
             <div className="summary-info">
 
@@ -1166,9 +1294,7 @@ function Payment() {
 
             </div>
 
-            {/* ============================================
-                FINAL TOTAL
-            ============================================ */}
+            {/* FINAL TOTAL */}
 
             <div className="summary-total">
 
@@ -1199,4 +1325,3 @@ function Payment() {
 }
 
 export default Payment;
-
