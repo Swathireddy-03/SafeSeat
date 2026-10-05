@@ -1,1010 +1,838 @@
 /* =========================================================
    SAFESEAT - MY TRIPS
-   Matches Home Page Design
-========================================================= */
+   ========================================================= */
 
 .my-trips-page {
   min-height: 100vh;
   background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(124, 58, 237, 0.10),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 20%,
-      rgba(236, 72, 153, 0.08),
-      transparent 30%
-    ),
-    #f8f7fc;
-
-  color: #171526;
+    radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.08), transparent 30%),
+    radial-gradient(circle at 90% 10%, rgba(14, 165, 233, 0.07), transparent 28%),
+    #f6f8fc;
+  color: #172033;
+  padding-top: 80px;
 }
 
 /* =========================================================
-   MAIN CONTAINER
-========================================================= */
+   CONTAINER
+   ========================================================= */
 
 .my-trips-container {
-  width: min(1180px, 92%);
+  width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 36px 0 70px;
+  padding: 28px 0 70px;
 }
 
 /* =========================================================
-   BACK TO HOME
-========================================================= */
+   BACK BUTTON
+   ========================================================= */
 
 .my-trips-back-home {
-  border: none;
+  border: 0;
   background: transparent;
-  color: #6d28d9;
-
-  font-size: 16px;
+  color: #2563eb;
+  font-size: 14px;
   font-weight: 700;
-
-  padding: 8px 0;
-  margin-bottom: 24px;
-
   cursor: pointer;
-
-  transition: 0.25s ease;
+  padding: 8px 0;
+  margin-bottom: 20px;
+  transition: 0.2s ease;
 }
 
 .my-trips-back-home:hover {
-  color: #db2777;
-  transform: translateX(-4px);
+  color: #1d4ed8;
+  transform: translateX(-3px);
 }
 
 /* =========================================================
    HERO
-========================================================= */
+   ========================================================= */
 
 .my-trips-hero {
   position: relative;
-
+  overflow: hidden;
+  min-height: 210px;
+  padding: 38px 42px;
+  border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  overflow: hidden;
-
-  min-height: 250px;
-
-  padding: 42px 48px;
-
-  border-radius: 28px;
+  gap: 30px;
 
   background:
     linear-gradient(
       135deg,
-      #6d28d9 0%,
-      #7c3aed 45%,
-      #db2777 100%
+      #0f3d91 0%,
+      #1559b7 50%,
+      #0b78c8 100%
     );
 
-  box-shadow:
-    0 20px 50px rgba(109, 40, 217, 0.20);
-
-  color: white;
+  box-shadow: 0 20px 45px rgba(15, 61, 145, 0.2);
 }
-
-/* decorative circles */
 
 .my-trips-hero::before {
   content: "";
-
   position: absolute;
-
-  width: 260px;
-  height: 260px;
-
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-
-  right: 130px;
-  top: -150px;
-
-  background: rgba(255, 255, 255, 0.10);
+  right: 100px;
+  top: -180px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .my-trips-hero::after {
   content: "";
-
   position: absolute;
-
-  width: 190px;
-  height: 190px;
-
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-
-  right: -60px;
-  bottom: -90px;
-
-  background: rgba(255, 255, 255, 0.10);
+  right: -70px;
+  bottom: -130px;
+  background: rgba(255, 255, 255, 0.07);
 }
-
-/* =========================================================
-   HERO CONTENT
-========================================================= */
 
 .my-trips-hero-content {
   position: relative;
   z-index: 2;
-
-  max-width: 680px;
+  max-width: 720px;
 }
 
 .hero-label {
-  display: inline-flex;
-  align-items: center;
-
-  margin-bottom: 12px;
-
-  font-size: 13px;
+  display: inline-block;
+  margin-bottom: 10px;
+  color: #bfdbfe;
+  font-size: 11px;
   font-weight: 800;
-
   letter-spacing: 2px;
-
-  color: rgba(255, 255, 255, 0.75);
 }
 
 .my-trips-hero h1 {
   margin: 0;
-
-  font-size: clamp(40px, 5vw, 60px);
-
+  color: #ffffff;
+  font-size: clamp(34px, 5vw, 52px);
   line-height: 1.05;
-
-  font-weight: 800;
-
-  letter-spacing: -2px;
+  font-weight: 850;
+  letter-spacing: -1.5px;
 }
 
 .my-trips-hero h1 span {
-  color: #fce7f3;
+  color: #7dd3fc;
 }
 
 .my-trips-hero p {
-  max-width: 590px;
-
-  margin: 18px 0 0;
-
-  font-size: 17px;
+  max-width: 600px;
+  margin: 15px 0 0;
+  color: #dbeafe;
+  font-size: 15px;
   line-height: 1.7;
-
-  color: rgba(255, 255, 255, 0.82);
 }
-
-/* =========================================================
-   HERO ICON
-========================================================= */
 
 .hero-icon-wrapper {
   position: relative;
   z-index: 2;
-
-  width: 115px;
-  height: 115px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 32px;
-
-  background: rgba(255, 255, 255, 0.14);
-
-  border: 1px solid rgba(255, 255, 255, 0.20);
-
-  backdrop-filter: blur(12px);
-
-  box-shadow:
-    0 15px 35px rgba(0, 0, 0, 0.12);
+  width: 125px;
+  height: 125px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .hero-icon {
-  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 42px;
+}
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.my-trips-container > div[style] {
+  margin-top: 20px !important;
+  box-shadow: 0 5px 18px rgba(180, 35, 24, 0.06);
 }
 
 /* =========================================================
    CONTROLS
-========================================================= */
+   ========================================================= */
 
 .trip-controls {
+  margin: 26px 0 20px;
+  padding: 18px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 
-  gap: 24px;
-
-  margin: 30px 0 24px;
-
-  padding: 18px 22px;
-
-  border-radius: 20px;
-
-  background: rgba(255, 255, 255, 0.86);
-
-  border: 1px solid rgba(109, 40, 217, 0.08);
-
-  box-shadow:
-    0 10px 35px rgba(30, 20, 60, 0.06);
-
-  backdrop-filter: blur(12px);
+  background: #ffffff;
+  border: 1px solid #e5eaf2;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
 }
-
-/* =========================================================
-   TRIP COUNT
-========================================================= */
 
 .trip-count {
   display: flex;
   align-items: center;
-
-  gap: 13px;
+  gap: 12px;
 }
 
 .trip-count-number {
-  width: 48px;
-  height: 48px;
+  min-width: 45px;
+  height: 45px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 20px;
+  font-weight: 850;
+}
+
+.trip-count strong {
+  display: block;
+  color: #172033;
+  font-size: 14px;
+}
+
+.trip-count span {
+  display: block;
+  margin-top: 3px;
+  color: #8a94a6;
+  font-size: 12px;
+}
+
+.trip-filters {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px;
+  background: #f3f5f9;
+  border-radius: 10px;
+}
+
+.trip-filters button {
+  border: 0;
+  padding: 9px 14px;
+  border-radius: 7px;
+  background: transparent;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.trip-filters button:hover {
+  color: #2563eb;
+}
+
+.trip-filters button.filter-active {
+  background: #ffffff;
+  color: #2563eb;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-trips {
+  margin: 35px auto;
+  max-width: 600px;
+  padding: 55px 30px;
+  text-align: center;
+
+  background: #ffffff;
+  border: 1px solid #e5eaf2;
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
+}
+
+.empty-trip-icon {
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 18px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 15px;
+  border-radius: 50%;
+  background: #eff6ff;
+  font-size: 34px;
+}
 
-  background: linear-gradient(
-    135deg,
-    #ede9fe,
-    #fce7f3
-  );
-
-  color: #6d28d9;
-
-  font-size: 21px;
+.empty-trips h2 {
+  margin: 0;
+  color: #172033;
+  font-size: 24px;
   font-weight: 800;
 }
 
-.trip-count strong {
-  display: block;
-
-  font-size: 17px;
-}
-
-.trip-count span {
-  display: block;
-
-  margin-top: 3px;
-
-  color: #8b8798;
-
+.empty-trips p {
+  margin: 10px auto 24px;
+  max-width: 420px;
+  color: #7b8494;
   font-size: 14px;
+  line-height: 1.6;
 }
 
-/* =========================================================
-   FILTERS
-========================================================= */
-
-.trip-filters {
-  display: flex;
+.empty-trips button {
+  border: 0;
+  padding: 12px 20px;
+  display: inline-flex;
   align-items: center;
+  gap: 10px;
 
-  gap: 7px;
+  border-radius: 10px;
+  background: #2563eb;
+  color: #ffffff;
 
-  padding: 5px;
-
-  border-radius: 13px;
-
-  background: #f4f2f8;
-}
-
-.trip-filters button {
-  border: none;
-
-  padding: 10px 16px;
-
-  border-radius: 9px;
-
-  background: transparent;
-
-  color: #777184;
-
-  font-size: 14px;
-  font-weight: 700;
-
+  font-size: 13px;
+  font-weight: 750;
   cursor: pointer;
-
-  transition: 0.25s ease;
+  box-shadow: 0 7px 18px rgba(37, 99, 235, 0.22);
+  transition: 0.2s ease;
 }
 
-.trip-filters button:hover {
-  color: #6d28d9;
+.empty-trips button:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
 }
 
-.trip-filters button.filter-active {
-  background: white;
-
-  color: #6d28d9;
-
-  box-shadow:
-    0 4px 12px rgba(30, 20, 60, 0.08);
+.empty-trips button span {
+  font-size: 18px;
 }
 
 /* =========================================================
    TRIPS LIST
-========================================================= */
+   ========================================================= */
 
 .trips-list {
   display: flex;
-
   flex-direction: column;
-
-  gap: 20px;
+  gap: 18px;
 }
 
 /* =========================================================
    TRIP CARD
-========================================================= */
+   ========================================================= */
 
 .trip-card {
-  position: relative;
-
   overflow: hidden;
-
-  border-radius: 24px;
-
-  background: white;
-
-  border: 1px solid rgba(109, 40, 217, 0.08);
-
-  box-shadow:
-    0 12px 35px rgba(30, 20, 60, 0.07);
-
+  background: #ffffff;
+  border: 1px solid #e4e9f1;
+  border-radius: 19px;
+  box-shadow: 0 9px 28px rgba(15, 23, 42, 0.06);
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .trip-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+  border-color: #cbdaf4;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.09);
+}
 
-  box-shadow:
-    0 20px 45px rgba(30, 20, 60, 0.11);
+.trip-card-cancelled {
+  opacity: 0.92;
 }
 
 /* =========================================================
    CARD TOP
-========================================================= */
+   ========================================================= */
 
 .trip-card-top {
+  padding: 20px 23px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   gap: 20px;
 
-  padding: 25px 28px;
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f8fbff
+  );
 
-  border-bottom: 1px solid #f0edf5;
+  border-bottom: 1px solid #edf0f5;
 }
 
 .trip-transport {
   display: flex;
   align-items: center;
-
-  gap: 15px;
+  gap: 13px;
+  min-width: 0;
 }
 
 .transport-icon {
-  width: 54px;
-  height: 54px;
+  width: 49px;
+  height: 49px;
+  flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 16px;
-
-  font-size: 27px;
+  border-radius: 13px;
+  font-size: 25px;
 }
 
 .transport-icon.bus {
-  background: #fce7f3;
+  background: #eff6ff;
 }
 
 .transport-icon.train {
-  background: #ede9fe;
+  background: #eef2ff;
 }
 
 .transport-label {
   display: block;
-
-  margin-bottom: 4px;
-
-  color: #9a94a5;
-
-  font-size: 12px;
+  margin-bottom: 3px;
+  color: #8b95a7;
+  font-size: 10px;
   font-weight: 800;
-
-  letter-spacing: 1.5px;
+  letter-spacing: 1.1px;
 }
 
 .trip-transport h2 {
   margin: 0;
-
-  font-size: 20px;
+  color: #172033;
+  font-size: 17px;
   font-weight: 800;
-
-  color: #211c2e;
 }
 
 .trip-transport p {
   margin: 4px 0 0;
-
-  color: #918b9d;
-
-  font-size: 14px;
+  color: #7b8494;
+  font-size: 12px;
 }
 
 /* =========================================================
    STATUS
-========================================================= */
+   ========================================================= */
 
 .trip-status {
+  padding: 7px 12px;
   display: inline-flex;
   align-items: center;
-
   gap: 7px;
+  flex-shrink: 0;
 
-  padding: 8px 13px;
-
-  border-radius: 30px;
-
-  font-size: 13px;
+  border-radius: 999px;
+  font-size: 11px;
   font-weight: 800;
+  text-transform: capitalize;
 }
 
 .trip-status.confirmed {
-  background: #ecfdf5;
-  color: #059669;
+  color: #087443;
+  background: #ecfdf3;
+  border: 1px solid #bbf7d0;
 }
 
 .trip-status.cancelled {
-  background: #fef2f2;
-  color: #dc2626;
+  color: #b42318;
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
 }
 
 .status-dot {
   width: 7px;
   height: 7px;
-
   border-radius: 50%;
-
   background: currentColor;
 }
 
 /* =========================================================
    ROUTE
-========================================================= */
+   ========================================================= */
 
 .trip-route {
+  padding: 25px 24px;
   display: grid;
-
-  grid-template-columns: 140px 1fr 140px;
-
+  grid-template-columns: 1fr 150px 1fr;
   align-items: center;
-
   gap: 20px;
-
-  padding: 28px;
 }
 
 .trip-location {
   display: flex;
-
   flex-direction: column;
-
-  gap: 5px;
 }
 
 .trip-location strong {
-  color: #211c2e;
-
-  font-size: 23px;
-
-  font-weight: 800;
+  color: #172033;
+  font-size: 20px;
+  font-weight: 850;
 }
 
 .trip-location span {
-  color: #817b8e;
-
-  font-size: 14px;
+  margin-top: 5px;
+  color: #667085;
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .trip-location.destination {
   text-align: right;
 }
 
-/* =========================================================
-   ROUTE LINE
-========================================================= */
-
 .route-line {
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
-  gap: 8px;
+  gap: 5px;
 }
 
 .route-dot {
   width: 9px;
   height: 9px;
-
   flex-shrink: 0;
-
   border-radius: 50%;
-
-  background: #7c3aed;
+  background: #2563eb;
 }
 
 .route-dashes {
   height: 1px;
-
   flex: 1;
-
-  min-width: 25px;
-
-  background:
-    repeating-linear-gradient(
-      to right,
-      #c4bdd1 0,
-      #c4bdd1 5px,
-      transparent 5px,
-      transparent 10px
-    );
+  border-top: 2px dashed #cbd5e1;
 }
 
 .route-arrow {
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 32px;
-  height: 32px;
-
   border-radius: 50%;
-
-  background: #f5f3fa;
-
-  color: #7c3aed;
-
-  font-size: 17px;
-  font-weight: 800;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 16px;
+  font-weight: 900;
 }
 
 /* =========================================================
    DETAILS
-========================================================= */
+   ========================================================= */
 
 .trip-details {
+  padding: 17px 23px;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
 
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  margin: 0 28px;
-
-  padding: 20px 0;
-
-  border-top: 1px solid #f0edf5;
-  border-bottom: 1px solid #f0edf5;
+  background: #f9fafc;
+  border-top: 1px solid #edf0f5;
+  border-bottom: 1px solid #edf0f5;
 }
 
 .trip-detail {
-  padding: 0 20px;
-
-  border-right: 1px solid #eeeaf3;
+  min-width: 0;
 }
 
-.trip-detail:first-child {
-  padding-left: 0;
-}
-
-.trip-detail:last-child {
-  border-right: none;
-}
-
-.trip-detail span {
+.trip-detail > span {
   display: block;
-
-  margin-bottom: 7px;
-
-  color: #a19aa9;
-
-  font-size: 11px;
+  margin-bottom: 6px;
+  color: #98a2b3;
+  font-size: 10px;
   font-weight: 800;
-
-  letter-spacing: 1.2px;
+  letter-spacing: 0.8px;
 }
 
-.trip-detail strong {
+.trip-detail > strong {
   display: block;
+  color: #344054;
+  font-size: 13px;
+  font-weight: 750;
 
-  color: #292333;
-
-  font-size: 15px;
-
-  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.trip-detail.fare strong {
-  color: #6d28d9;
-
-  font-size: 18px;
+.trip-detail.fare > strong {
+  color: #0f766e;
+  font-size: 16px;
 }
 
 /* =========================================================
    CARD FOOTER
-========================================================= */
+   ========================================================= */
 
 .trip-card-footer {
+  padding: 17px 23px;
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
   gap: 20px;
+}
 
-  padding: 18px 28px;
+.booking-id {
+  min-width: 0;
 }
 
 .booking-id span {
   display: block;
-
   margin-bottom: 4px;
-
-  color: #a19aa9;
-
-  font-size: 11px;
+  color: #98a2b3;
+  font-size: 9px;
   font-weight: 800;
-
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
 }
 
 .booking-id strong {
-  color: #6d28d9;
+  display: block;
+  max-width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
-  font-size: 15px;
+  color: #667085;
+  font-size: 11px;
+  font-weight: 700;
 }
-
-/* =========================================================
-   ACTIONS
-========================================================= */
 
 .trip-actions {
   display: flex;
-
-  gap: 9px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.view-ticket-btn,
-.cancel-trip-btn {
-  border-radius: 10px;
+.trip-actions button {
+  min-height: 38px;
+  padding: 9px 14px;
 
-  padding: 10px 16px;
-
-  font-size: 13px;
-  font-weight: 800;
-
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 750;
   cursor: pointer;
-
-  transition: 0.25s ease;
+  transition: 0.2s ease;
 }
 
 .view-ticket-btn {
-  border: none;
-
-  background: linear-gradient(
-    135deg,
-    #7c3aed,
-    #db2777
-  );
-
-  color: white;
-
-  box-shadow:
-    0 6px 15px rgba(124, 58, 237, 0.18);
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #2563eb;
 }
 
 .view-ticket-btn:hover {
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 9px 20px rgba(124, 58, 237, 0.25);
+  background: #dbeafe;
 }
 
 .cancel-trip-btn {
-  border: 1px solid #f1d9df;
-
-  background: #fff7f8;
-
+  border: 1px solid #fecaca;
+  background: #ffffff;
   color: #dc2626;
 }
 
 .cancel-trip-btn:hover {
-  background: #fee2e2;
+  background: #fef2f2;
 }
 
-/* =========================================================
-   CANCELLED CARD
-========================================================= */
-
-.trip-card-cancelled {
-  opacity: 0.82;
+.refund-btn {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
 }
 
-.trip-card-cancelled .transport-icon {
-  filter: grayscale(0.4);
+.refund-btn:hover {
+  background: #dcfce7;
 }
 
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
-.empty-trips {
-  padding: 70px 25px;
-
-  text-align: center;
-
-  border-radius: 25px;
-
-  background: white;
-
-  border: 1px solid rgba(109, 40, 217, 0.08);
-
-  box-shadow:
-    0 12px 35px rgba(30, 20, 60, 0.06);
-}
-
-.empty-trip-icon {
-  width: 75px;
-  height: 75px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin: 0 auto 18px;
-
-  border-radius: 22px;
-
-  background: linear-gradient(
-    135deg,
-    #ede9fe,
-    #fce7f3
-  );
-
-  font-size: 36px;
-}
-
-.empty-trips h2 {
-  margin: 0;
-
-  font-size: 26px;
-}
-
-.empty-trips p {
-  margin: 9px 0 22px;
-
-  color: #8b8497;
-
-  font-size: 15px;
-}
-
-.empty-trips button {
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 12px;
-
-  border: none;
-
-  padding: 12px 20px;
-
-  border-radius: 11px;
-
-  background: linear-gradient(
-    135deg,
-    #7c3aed,
-    #db2777
-  );
-
-  color: white;
-
-  font-size: 13px;
-  font-weight: 800;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 8px 20px rgba(124, 58, 237, 0.20);
-}
-
-.empty-trips button span {
-  font-size: 17px;
+.refund-processing-btn,
+.refund-completed-btn {
+  border: 1px solid #e5e7eb;
+  background: #f8fafc;
+  color: #64748b;
+  cursor: not-allowed !important;
 }
 
 /* =========================================================
    TICKET OVERLAY
-========================================================= */
+   ========================================================= */
 
 .ticket-overlay {
   position: fixed;
-
   inset: 0;
-
   z-index: 9999;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
 
   padding: 25px;
 
-  background: rgba(24, 18, 38, 0.58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.68);
+  backdrop-filter: blur(7px);
+
+  animation: ticketOverlayIn 0.2s ease;
+}
+
+@keyframes ticketOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 /* =========================================================
    TICKET MODAL
-========================================================= */
+   ========================================================= */
 
 .ticket-modal {
-  width: min(650px, 100%);
-
-  max-height: 90vh;
-
+  width: min(720px, 100%);
+  max-height: calc(100vh - 50px);
   overflow-y: auto;
 
-  border-radius: 25px;
+  background: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
 
-  background: white;
+  animation: ticketModalIn 0.25s ease;
+}
 
-  box-shadow:
-    0 30px 80px rgba(20, 10, 40, 0.30);
+@keyframes ticketModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* =========================================================
    MODAL HEADER
-========================================================= */
+   ========================================================= */
 
 .ticket-modal-header {
-  display: flex;
+  padding: 21px 24px;
 
+  display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 20px;
 
-  padding: 25px 28px;
+  background: linear-gradient(
+    135deg,
+    #0f3d91,
+    #1268ba
+  );
 
-  background:
-    linear-gradient(
-      135deg,
-      #6d28d9,
-      #db2777
-    );
-
-  color: white;
+  color: #ffffff;
 }
 
 .ticket-modal-header span {
-  display: block;
-
-  margin-bottom: 5px;
-
-  color: rgba(255, 255, 255, 0.70);
-
-  font-size: 11px;
+  color: #bfdbfe;
+  font-size: 9px;
   font-weight: 800;
-
   letter-spacing: 1.5px;
 }
 
 .ticket-modal-header h2 {
-  margin: 0;
-
-  font-size: 22px;
+  margin: 5px 0 0;
+  font-size: 20px;
+  font-weight: 800;
 }
 
 .ticket-modal-header button {
   width: 34px;
   height: 34px;
 
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.15);
-
-  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 
   font-size: 24px;
-
+  line-height: 1;
   cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.ticket-modal-header button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* =========================================================
    TICKET MAIN
-========================================================= */
+   ========================================================= */
 
 .ticket-main {
-  padding: 25px 28px;
+  padding: 24px;
 }
-
-/* =========================================================
-   TICKET TYPE
-========================================================= */
 
 .ticket-type {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
-
-  margin-bottom: 22px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .ticket-type span {
-  padding: 7px 11px;
-
-  border-radius: 8px;
-
-  background: #f3effb;
-
-  color: #6d28d9;
-
-  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 9px;
   font-weight: 800;
-
-  letter-spacing: 1px;
 }
 
 .ticket-type strong {
-  color: #059669;
-
-  font-size: 14px;
+  color: #087443;
+  font-size: 12px;
+  text-transform: capitalize;
 }
 
 /* =========================================================
    TICKET ROUTE
-========================================================= */
+   ========================================================= */
 
 .ticket-route {
+  padding: 20px;
   display: grid;
-
   grid-template-columns: 1fr 50px 1fr;
-
   align-items: center;
+  gap: 15px;
 
-  padding: 22px;
-
-  border-radius: 17px;
-
-  background: #faf9fc;
+  border: 1px solid #e5eaf2;
+  border-radius: 14px;
+  background: #f8fafc;
 }
 
 .ticket-route > div:not(.ticket-route-arrow) {
   display: flex;
-
   flex-direction: column;
-
-  gap: 5px;
 }
 
 .ticket-route > div:last-child {
@@ -1012,392 +840,312 @@
 }
 
 .ticket-route strong {
-  color: #252031;
-
-  font-size: 23px;
+  color: #172033;
+  font-size: 21px;
+  font-weight: 850;
 }
 
 .ticket-route span {
-  color: #8e8798;
-
-  font-size: 14px;
+  margin-top: 4px;
+  color: #667085;
+  font-size: 12px;
 }
 
 .ticket-route-arrow {
-  text-align: center;
+  width: 40px;
+  height: 40px;
 
-  color: #7c3aed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  font-size: 22px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 18px;
   font-weight: 800;
 }
 
 /* =========================================================
-   TICKET INFO
-========================================================= */
+   TICKET INFO GRID
+   ========================================================= */
 
 .ticket-info-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 10px;
-
   margin-top: 18px;
+  padding: 17px;
 
-  padding: 18px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 
-  border-bottom: 1px solid #eeeaf3;
+  border: 1px solid #e5eaf2;
+  border-radius: 13px;
 }
 
 .ticket-info-grid > div {
-  padding-right: 10px;
-
-  border-right: 1px solid #eeeaf3;
-}
-
-.ticket-info-grid > div:last-child {
-  border-right: none;
+  min-width: 0;
 }
 
 .ticket-info-grid span,
 .ticket-bottom span {
   display: block;
-
-  margin-bottom: 6px;
-
-  color: #9a93a5;
-
-  font-size: 10px;
+  margin-bottom: 5px;
+  color: #98a2b3;
+  font-size: 9px;
   font-weight: 800;
-
-  letter-spacing: 1px;
+  letter-spacing: 0.7px;
 }
 
 .ticket-info-grid strong,
 .ticket-bottom strong {
-  color: #282231;
-
-  font-size: 14px;
+  display: block;
+  color: #344054;
+  font-size: 12px;
+  font-weight: 750;
 }
 
 /* =========================================================
    PASSENGERS
-========================================================= */
+   ========================================================= */
 
 .ticket-passengers {
   margin-top: 20px;
 }
 
 .ticket-passengers h3 {
-  margin: 0 0 13px;
-
-  font-size: 17px;
+  margin: 0 0 10px;
+  color: #172033;
+  font-size: 15px;
+  font-weight: 800;
 }
 
 .ticket-passenger {
+  padding: 12px 14px;
+  margin-bottom: 8px;
+
   display: flex;
-
   align-items: center;
-
   gap: 12px;
 
-  padding: 12px 0;
-
-  border-bottom: 1px solid #f0edf5;
+  border: 1px solid #e8edf3;
+  border-radius: 10px;
+  background: #ffffff;
 }
 
 .passenger-number {
   width: 34px;
   height: 34px;
+  flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 10px;
-
-  background: #f3effb;
-
-  color: #6d28d9;
-
-  font-size: 12px;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 10px;
   font-weight: 800;
 }
 
 .passenger-info {
+  min-width: 0;
   flex: 1;
 }
 
 .passenger-info strong {
   display: block;
-
-  color: #282231;
-
-  font-size: 14px;
+  color: #344054;
+  font-size: 12px;
 }
 
 .passenger-info span {
   display: block;
-
   margin-top: 3px;
-
-  color: #918a9c;
-
-  font-size: 12px;
+  color: #8a94a6;
+  font-size: 10px;
 }
 
 .passenger-seat {
-  color: #6d28d9;
-
-  font-size: 14px;
+  color: #2563eb;
+  font-size: 12px;
 }
 
 /* =========================================================
    TICKET BOTTOM
-========================================================= */
+   ========================================================= */
 
 .ticket-bottom {
+  margin-top: 18px;
+  padding: 16px;
+
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 15px;
-
-  margin-top: 20px;
-
-  padding: 18px;
-
-  border-radius: 15px;
-
-  background: #faf9fc;
+  border-radius: 12px;
+  background: #f8fafc;
 }
 
 .payment-paid {
-  color: #059669 !important;
-}
-
-/* =========================================================
-   MODAL FOOTER
-========================================================= */
-
-.ticket-modal-footer {
-  display: flex;
-
-  justify-content: flex-end;
-
-  gap: 10px;
-
-  padding: 18px 28px;
-
-  border-top: 1px solid #eeeaf3;
-}
-
-.ticket-close-btn,
-.ticket-cancel-btn {
-  padding: 10px 18px;
-
-  border-radius: 10px;
-
-  font-size: 13px;
-  font-weight: 800;
-
-  cursor: pointer;
-}
-
-.ticket-close-btn {
-  border: 1px solid #e5e1eb;
-
-  background: white;
-
-  color: #6e6877;
-}
-
-.ticket-cancel-btn {
-  border: none;
-
-  background: #fee2e2;
-
-  color: #dc2626;
-}
-
-/* =========================================================
-   REFUND BUTTONS
-========================================================= */
-
-.refund-btn,
-.ticket-refund-btn {
-  border: none;
-
-  padding: 10px 16px;
-
-  border-radius: 10px;
-
-  background: #16a34a;
-
-  color: white;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.2s ease;
-}
-
-.refund-btn:hover,
-.ticket-refund-btn:hover {
-  transform: translateY(-1px);
-  opacity: 0.9;
-}
-
-.refund-processing-btn {
-  border: none;
-
-  padding: 10px 16px;
-
-  border-radius: 10px;
-
-  background: #f59e0b;
-
-  color: white;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  cursor: not-allowed;
-}
-
-.refund-completed-btn {
-  border: none;
-
-  padding: 10px 16px;
-
-  border-radius: 10px;
-
-  background: #15803d;
-
-  color: white;
-
-  font-size: 13px;
-  font-weight: 700;
-
-  cursor: not-allowed;
+  color: #087443 !important;
 }
 
 .refund-processing {
-  color: #f59e0b;
-
-  font-size: 13px;
+  color: #b45309 !important;
 }
 
 .refund-completed {
-  color: #16a34a;
-
-  font-size: 13px;
+  color: #087443 !important;
 }
 
 .refund-not-requested {
-  color: #64748b;
+  color: #667085 !important;
+}
 
-  font-size: 13px;
+/* =========================================================
+   TICKET FOOTER
+   ========================================================= */
+
+.ticket-modal-footer {
+  padding: 17px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+
+  border-top: 1px solid #e9edf3;
+}
+
+.ticket-modal-footer button {
+  min-height: 39px;
+  padding: 9px 15px;
+
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.ticket-close-btn {
+  border: 1px solid #d0d5dd;
+  background: #ffffff;
+  color: #475467;
+}
+
+.ticket-close-btn:hover {
+  background: #f8fafc;
+}
+
+.ticket-cancel-btn {
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #dc2626;
+}
+
+.ticket-refund-btn {
+  border: 1px solid #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
 }
 
 .ticket-refund-btn:disabled,
-.refund-completed-btn:disabled,
-.refund-processing-btn:disabled {
-  opacity: 0.85;
+.refund-completed-btn:disabled {
+  opacity: 0.65;
   cursor: not-allowed;
 }
 
 /* =========================================================
-   RESPONSIVE
-========================================================= */
+   SCROLLBAR
+   ========================================================= */
+
+.ticket-modal::-webkit-scrollbar {
+  width: 7px;
+}
+
+.ticket-modal::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.ticket-modal::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 20px;
+}
+
+.ticket-modal::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
 
 @media (max-width: 850px) {
+  .my-trips-container {
+    width: min(100% - 28px, 720px);
+  }
 
   .my-trips-hero {
-    padding: 35px;
+    padding: 30px;
   }
 
   .hero-icon-wrapper {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
   }
 
   .hero-icon {
-    font-size: 40px;
-  }
-
-  .trip-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .trip-filters {
-    justify-content: center;
+    width: 70px;
+    height: 70px;
+    font-size: 32px;
   }
 
   .trip-route {
-    grid-template-columns: 110px 1fr 110px;
+    grid-template-columns: 1fr 110px 1fr;
   }
 
   .trip-details {
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
   }
 
-  .trip-detail {
-    border-right: none;
-    padding: 0;
-  }
-
-  .trip-detail:nth-child(1),
-  .trip-detail:nth-child(2) {
-    padding-bottom: 12px;
-    border-bottom: 1px solid #eeeaf3;
-  }
-
-  .ticket-info-grid {
+  .ticket-info-grid,
+  .ticket-bottom {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .ticket-info-grid > div:nth-child(2) {
-    border-right: none;
   }
 }
 
 /* =========================================================
    MOBILE
-========================================================= */
+   ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
+  .my-trips-page {
+    padding-top: 65px;
+  }
 
   .my-trips-container {
-    width: 94%;
-    padding-top: 20px;
+    width: calc(100% - 22px);
+    padding-top: 18px;
+  }
+
+  .my-trips-back-home {
+    margin-bottom: 14px;
   }
 
   .my-trips-hero {
     min-height: auto;
-
-    padding: 30px 24px;
-
-    border-radius: 22px;
+    padding: 27px 22px;
+    border-radius: 18px;
   }
 
   .my-trips-hero h1 {
-    font-size: 40px;
+    font-size: 34px;
   }
 
   .my-trips-hero p {
-    font-size: 14px;
-  }
-
-  .hero-label {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .hero-icon-wrapper {
@@ -1405,9 +1153,9 @@
   }
 
   .trip-controls {
-    padding: 15px;
-
-    border-radius: 17px;
+    align-items: stretch;
+    flex-direction: column;
+    padding: 14px;
   }
 
   .trip-filters {
@@ -1416,156 +1164,175 @@
 
   .trip-filters button {
     flex: 1;
-
-    padding: 9px 5px;
-
-    font-size: 12px;
+    padding: 9px 7px;
   }
 
   .trip-card {
-    border-radius: 19px;
+    border-radius: 15px;
   }
 
   .trip-card-top {
+    padding: 16px;
     align-items: flex-start;
-
     flex-direction: column;
-
-    padding: 20px;
   }
 
   .trip-status {
     align-self: flex-start;
-
-    font-size: 12px;
   }
 
   .trip-route {
+    padding: 19px 16px;
     grid-template-columns: 1fr;
-
-    gap: 15px;
-
-    padding: 22px 20px;
+    gap: 13px;
   }
 
   .trip-location.destination {
     text-align: left;
   }
 
-  .trip-location strong {
-    font-size: 21px;
-  }
-
-  .trip-location span {
-    font-size: 13px;
-  }
-
   .route-line {
-    transform: rotate(90deg);
-
     width: 100%;
   }
 
+  .trip-location strong {
+    font-size: 18px;
+  }
+
   .trip-details {
-    margin: 0 20px;
-
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .trip-detail strong {
-    font-size: 14px;
-  }
-
-  .trip-detail span {
-    font-size: 10px;
+    padding: 15px 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 10px;
   }
 
   .trip-card-footer {
-    align-items: flex-start;
-
+    padding: 15px 16px;
+    align-items: stretch;
     flex-direction: column;
+  }
 
-    padding: 17px 20px;
+  .booking-id strong {
+    max-width: 100%;
   }
 
   .trip-actions {
     width: 100%;
+    justify-content: stretch;
   }
 
-  .view-ticket-btn,
-  .cancel-trip-btn {
+  .trip-actions button {
     flex: 1;
-
-    font-size: 12px;
   }
+
+  /* Modal */
 
   .ticket-overlay {
-    padding: 12px;
+    padding: 10px;
   }
 
   .ticket-modal {
-    max-height: 94vh;
-
-    border-radius: 20px;
-  }
-
-  .ticket-main {
-    padding: 20px;
+    max-height: calc(100vh - 20px);
+    border-radius: 17px;
   }
 
   .ticket-modal-header {
-    padding: 20px;
+    padding: 17px;
   }
 
-  .ticket-modal-header h2 {
-    font-size: 20px;
+  .ticket-main {
+    padding: 17px;
   }
 
   .ticket-route {
-    grid-template-columns: 1fr 35px 1fr;
-
-    padding: 16px;
-  }
-
-  .ticket-route strong {
-    font-size: 19px;
-  }
-
-  .ticket-route span {
-    font-size: 12px;
-  }
-
-  .ticket-info-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .ticket-info-grid span,
-  .ticket-bottom span {
-    font-size: 9px;
-  }
-
-  .ticket-info-grid strong,
-  .ticket-bottom strong {
-    font-size: 13px;
-  }
-
-  .ticket-bottom {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .ticket-route > div:last-child {
+    text-align: left;
+  }
+
+  .ticket-route-arrow {
+    transform: rotate(90deg);
+  }
+
+  .ticket-info-grid,
+  .ticket-bottom {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .ticket-modal-footer {
-    padding: 15px 20px;
+    padding: 14px 17px;
+    flex-wrap: wrap;
   }
 
-  .ticket-close-btn,
-  .ticket-cancel-btn {
+  .ticket-modal-footer button {
+    flex: 1;
+  }
+}
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .my-trips-hero {
+    padding: 23px 18px;
+  }
+
+  .my-trips-hero h1 {
+    font-size: 30px;
+  }
+
+  .trip-filters button {
+    font-size: 10px;
+  }
+
+  .transport-icon {
+    width: 43px;
+    height: 43px;
+    font-size: 21px;
+  }
+
+  .trip-transport h2 {
+    font-size: 15px;
+  }
+
+  .trip-details {
+    gap: 13px 7px;
+  }
+
+  .trip-detail > strong {
     font-size: 12px;
   }
 
-  .refund-btn,
-  .ticket-refund-btn,
-  .refund-processing-btn,
-  .refund-completed-btn {
-    font-size: 12px;
+  .trip-actions {
+    flex-direction: column;
+  }
+
+  .trip-actions button {
+    width: 100%;
+  }
+
+  .ticket-info-grid,
+  .ticket-bottom {
+    grid-template-columns: 1fr 1fr;
+    padding: 12px;
+  }
+
+  .ticket-passenger {
+    align-items: flex-start;
+  }
+
+  .passenger-seat {
+    margin-left: auto;
+  }
+
+  .ticket-modal-footer {
+    flex-direction: column;
+  }
+
+  .ticket-modal-footer button {
+    width: 100%;
   }
 }
