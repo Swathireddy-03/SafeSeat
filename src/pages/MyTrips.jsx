@@ -23,10 +23,8 @@ function MyTrips() {
       setLoading(true);
       setError("");
 
-      // Get the actual logged-in user
       let userId = localStorage.getItem("safeSeatUserId");
 
-      // If safeSeatUserId is missing, try safeSeatUser
       if (!userId) {
         try {
           const storedUser = JSON.parse(
@@ -82,14 +80,6 @@ function MyTrips() {
         );
       }
 
-      // Backend currently returns:
-      //
-      // {
-      //   success: true,
-      //   count: 2,
-      //   bookings: [...]
-      // }
-
       const backendBookings = Array.isArray(data?.bookings)
         ? data.bookings
         : Array.isArray(data?.data)
@@ -108,9 +98,21 @@ function MyTrips() {
         backendBookings.length
       );
 
+      // Debug every booking's transport information
+      backendBookings.forEach((booking) => {
+        console.log("MY TRIPS - BOOKING:", {
+          id: booking.id,
+          booking_id: booking.booking_id,
+          user_id: booking.user_id,
+          bus_id: booking.bus_id,
+          train_id: booking.train_id,
+          transport_type: booking.transport_type,
+          booking_status: booking.booking_status,
+        });
+      });
+
       setBookings(backendBookings);
 
-      // Save latest backend bookings as local backup
       localStorage.setItem(
         "safeSeatBookings",
         JSON.stringify(backendBookings)
@@ -118,11 +120,8 @@ function MyTrips() {
     } catch (err) {
       console.error("MY TRIPS ERROR:", err);
 
-      setError(
-        err.message || "Unable to load your trips."
-      );
+      setError(err.message || "Unable to load your trips.");
 
-      // Fallback to localStorage only if backend fails
       try {
         const stored = JSON.parse(
           localStorage.getItem("safeSeatBookings") || "[]"
@@ -147,17 +146,16 @@ function MyTrips() {
   }, []);
 
   // =====================================================
-  // LOAD BOOKINGS + BOOKING UPDATE LISTENER
+  // INITIAL LOAD + BOOKING UPDATE
   // =====================================================
 
   useEffect(() => {
-    // Delay initial fetch so React 19 does not complain
-    // about state updates directly inside the effect.
     const timer = window.setTimeout(() => {
       void loadBookings();
     }, 0);
 
     const handleUpdate = () => {
+      console.log("MY TRIPS - BOOKING UPDATED");
       void loadBookings();
     };
 
@@ -194,17 +192,46 @@ function MyTrips() {
   // =====================================================
 
   const getTransport = (trip) => {
-    return (
+    const explicitTransport = String(
       trip?.transportType ||
-      trip?.transport_type ||
-      trip?.transportMode ||
-      trip?.transport_mode ||
-      trip?.mode ||
-      trip?.type ||
-      "bus"
+        trip?.transport_type ||
+        trip?.transportMode ||
+        trip?.transport_mode ||
+        trip?.mode ||
+        trip?.type ||
+        ""
     )
-      .toString()
-      .toLowerCase();
+      .toLowerCase()
+      .trim();
+
+    // Backend database fields are the most reliable source.
+    if (explicitTransport === "bus") {
+      return "bus";
+    }
+
+    if (explicitTransport === "train") {
+      return "train";
+    }
+
+    // If there is a bus_id, this is definitely a bus booking.
+    if (
+      trip?.bus_id !== null &&
+      trip?.bus_id !== undefined &&
+      trip?.bus_id !== ""
+    ) {
+      return "bus";
+    }
+
+    // If there is a train_id, this is definitely a train booking.
+    if (
+      trip?.train_id !== null &&
+      trip?.train_id !== undefined &&
+      trip?.train_id !== ""
+    ) {
+      return "train";
+    }
+
+    return "bus";
   };
 
   // =====================================================
@@ -239,6 +266,7 @@ function MyTrips() {
       trip?.train?.number ||
       trip?.trainNumber ||
       trip?.train_number ||
+      trip?.train_id ||
       "N/A"
     );
   };
@@ -253,7 +281,9 @@ function MyTrips() {
       trip?.bus_name ||
       trip?.bus?.name ||
       trip?.bus?.bus_name ||
-      "SafeSeat Bus"
+      (trip?.bus_id
+        ? `SafeSeat Bus ${trip.bus_id}`
+        : "SafeSeat Bus")
     );
   };
 
@@ -263,6 +293,7 @@ function MyTrips() {
       trip?.bus_number ||
       trip?.bus?.busNumber ||
       trip?.bus?.bus_number ||
+      trip?.bus_id ||
       "N/A"
     );
   };
@@ -279,6 +310,8 @@ function MyTrips() {
       trip?.from_city ||
       trip?.origin ||
       trip?.source_city ||
+      trip?.boarding_point ||
+      trip?.boardingPoint ||
       "Origin"
     );
   };
@@ -291,6 +324,8 @@ function MyTrips() {
       trip?.to_city ||
       trip?.dest ||
       trip?.destination_city ||
+      trip?.dropping_point ||
+      trip?.droppingPoint ||
       "Destination"
     );
   };
@@ -344,9 +379,6 @@ function MyTrips() {
     if (!value) {
       return "N/A";
     }
-
-    // Backend sends values like:
-    // 2026-09-27T00:00:00.000Z
 
     const dateValue = new Date(value);
 
@@ -655,10 +687,7 @@ function MyTrips() {
   // =====================================================
 
   const getRefundStatus = (trip) => {
-    return (
-      trip?.refundStatus ||
-      "Not Requested"
-    );
+    return trip?.refundStatus || "Not Requested";
   };
 
   // =====================================================
@@ -785,9 +814,7 @@ function MyTrips() {
                   ? "filter-active"
                   : ""
               }
-              onClick={() =>
-                setFilter("all")
-              }
+              onClick={() => setFilter("all")}
             >
               All Trips
             </button>
@@ -834,17 +861,13 @@ function MyTrips() {
 
             <p>
               You don't have any{" "}
-              {filter === "all"
-                ? ""
-                : filter}{" "}
+              {filter === "all" ? "" : filter}{" "}
               trips yet.
             </p>
 
             <button
               type="button"
-              onClick={() =>
-                navigate("/home")
-              }
+              onClick={() => navigate("/home")}
             >
               Book a Trip
               <span>→</span>
@@ -865,9 +888,7 @@ function MyTrips() {
                   getStatus(trip);
 
                 const normalizedStatus =
-                  status
-                    .toLowerCase()
-                    .trim();
+                  status.toLowerCase().trim();
 
                 const isCancelled =
                   normalizedStatus ===
@@ -930,9 +951,9 @@ function MyTrips() {
                               ? `Train ${getTrainNumber(
                                   trip
                                 )}`
-                              : getBusNumber(
+                              : `Bus ${getBusNumber(
                                   trip
-                                )}
+                                )}`}
                           </p>
                         </div>
                       </div>
@@ -1049,8 +1070,7 @@ function MyTrips() {
                         </span>
 
                         <strong>
-                          {bookingId ||
-                            "N/A"}
+                          {bookingId || "N/A"}
                         </strong>
                       </div>
 
@@ -1104,8 +1124,7 @@ function MyTrips() {
                               className="refund-processing-btn"
                               disabled
                             >
-                              ⏳ Refund
-                              Processing
+                              ⏳ Refund Processing
                             </button>
                           )}
 
@@ -1117,8 +1136,7 @@ function MyTrips() {
                               className="refund-completed-btn"
                               disabled
                             >
-                              ✓ Refund
-                              Completed
+                              ✓ Refund Completed
                             </button>
                           )}
                       </div>
@@ -1256,12 +1274,24 @@ function MyTrips() {
                 </div>
 
                 <div>
-                  <span>TRAIN NO.</span>
+                  <span>
+                    {getTransport(
+                      selectedTrip
+                    ) === "train"
+                      ? "TRAIN NO."
+                      : "BUS NO."}
+                  </span>
 
                   <strong>
-                    {getTrainNumber(
+                    {getTransport(
                       selectedTrip
-                    )}
+                    ) === "train"
+                      ? getTrainNumber(
+                          selectedTrip
+                        )
+                      : getBusNumber(
+                          selectedTrip
+                        )}
                   </strong>
                 </div>
               </div>
@@ -1439,28 +1469,28 @@ function MyTrips() {
                 Close
               </button>
 
-              {getStatus(
+              {(getStatus(
                 selectedTrip
               ).toLowerCase() !==
                 "cancelled" &&
                 getStatus(
                   selectedTrip
                 ).toLowerCase() !==
-                  "canceled" && (
-                  <button
-                    type="button"
-                    className="ticket-cancel-btn"
-                    onClick={() =>
-                      cancelTrip(
-                        getBookingId(
-                          selectedTrip
-                        )
+                  "canceled") && (
+                <button
+                  type="button"
+                  className="ticket-cancel-btn"
+                  onClick={() =>
+                    cancelTrip(
+                      getBookingId(
+                        selectedTrip
                       )
-                    }
-                  >
-                    Cancel Trip
-                  </button>
-                )}
+                    )
+                  }
+                >
+                  Cancel Trip
+                </button>
+              )}
 
               {(getStatus(
                 selectedTrip
