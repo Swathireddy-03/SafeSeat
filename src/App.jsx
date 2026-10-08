@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -31,12 +32,13 @@ import LoginSelection from "./pages/LoginSelection";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 
+import OfflinePage from "./OfflinePage";
+
 // =====================================================
 // CSS
 // =====================================================
 
 import "./App.css";
-
 
 // =====================================================
 // APP CONTENT
@@ -47,210 +49,89 @@ function AppContent() {
     <>
       <Routes>
 
-        {/* =================================================
-            LANDING PAGE
-        ================================================= */}
+        {/* LANDING PAGE */}
+        <Route path="/" element={<Landing />} />
 
-        <Route
-          path="/"
-          element={<Landing />}
-        />
+        {/* HOME */}
+        <Route path="/home" element={<Home />} />
 
+        {/* LOGIN / SIGNUP */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login-selection" element={<LoginSelection />} />
 
-        {/* =================================================
-            HOME
-        ================================================= */}
+        {/* ADMIN */}
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
 
-        <Route
-          path="/home"
-          element={<Home />}
-        />
+        {/* TRACK TICKET */}
+        <Route path="/track-ticket" element={<TrackTicket />} />
 
+        {/* BUS RESULTS */}
+        <Route path="/results" element={<BusResults />} />
+        <Route path="/bus-results" element={<BusResults />} />
 
-        {/* =================================================
-            LOGIN / SIGNUP
-        ================================================= */}
-
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-
-        <Route
-          path="/signup"
-          element={<Signup />}
-        />
-
-        <Route
-          path="/login-selection"
-          element={<LoginSelection />}
-        />
-
-
-        {/* =================================================
-            ADMIN
-        ================================================= */}
-
-        <Route
-          path="/admin-login"
-          element={<AdminLogin />}
-        />
-
-        <Route
-          path="/admin-dashboard"
-          element={<AdminDashboard />}
-        />
-
-
-        {/* =================================================
-            TRACK TICKET
-        ================================================= */}
-
-        <Route
-          path="/track-ticket"
-          element={<TrackTicket />}
-        />
-
-
-        {/* =================================================
-            BUS RESULTS
-        ================================================= */}
-
-        <Route
-          path="/results"
-          element={<BusResults />}
-        />
-
-        <Route
-          path="/bus-results"
-          element={<BusResults />}
-        />
-
-
-        {/* =================================================
-            BUS SEAT SELECTION
-        ================================================= */}
-
+        {/* BUS SEAT SELECTION */}
         <Route
           path="/seats/:busId"
           element={<SeatSelection />}
         />
 
-
-        {/* =================================================
-            PASSENGER DETAILS
-        ================================================= */}
-
+        {/* PASSENGER DETAILS */}
         <Route
           path="/passenger-details"
           element={<PassengerDetails />}
         />
 
-
-        {/* =================================================
-            BOOKING SUMMARY
-        ================================================= */}
-
+        {/* BOOKING SUMMARY */}
         <Route
           path="/booking-summary"
           element={<BookingSummary />}
         />
 
-
-        {/* =================================================
-            BUS PAYMENT
-        ================================================= */}
-
+        {/* BUS PAYMENT */}
         <Route
           path="/payment"
           element={<Payment />}
         />
 
-
-        {/* =================================================
-            BUS BOOKING CONFIRMATION
-        ================================================= */}
-
+        {/* BUS BOOKING CONFIRMATION */}
         <Route
           path="/booking-confirmation"
           element={<BookingConfirmation />}
         />
 
+        {/* EXPLORE */}
+        <Route path="/explore" element={<Explore />} />
 
-        {/* =================================================
-            EXPLORE
-        ================================================= */}
+        {/* MY TRIPS */}
+        <Route path="/my-trips" element={<MyTrips />} />
 
-        <Route
-          path="/explore"
-          element={<Explore />}
-        />
+        {/* OFFERS */}
+        <Route path="/offers" element={<Offers />} />
 
+        {/* HELP */}
+        <Route path="/help" element={<Help />} />
 
-        {/* =================================================
-            MY TRIPS
-        ================================================= */}
-
-        <Route
-          path="/my-trips"
-          element={<MyTrips />}
-        />
-
-
-        {/* =================================================
-            OFFERS
-        ================================================= */}
-
-        <Route
-          path="/offers"
-          element={<Offers />}
-        />
-
-
-        {/* =================================================
-            HELP
-        ================================================= */}
-
-        <Route
-          path="/help"
-          element={<Help />}
-        />
-
-
-        {/* =================================================
-            TRAIN RESULTS
-        ================================================= */}
-
+        {/* TRAIN RESULTS */}
         <Route
           path="/train-results"
           element={<TrainResults />}
         />
 
-
-        {/* =================================================
-            TRAIN SEAT SELECTION
-        ================================================= */}
-
+        {/* TRAIN SEAT SELECTION */}
         <Route
           path="/train-seats/:id"
           element={<TrainSeatSelection />}
         />
 
-
-        {/* =================================================
-            TRAIN PASSENGER DETAILS
-        ================================================= */}
-
+        {/* TRAIN PASSENGER DETAILS */}
         <Route
           path="/train-passenger-details"
           element={<TrainPassengerDetails />}
         />
 
-
-        {/* =================================================
-            TRAIN PAYMENT
-        ================================================= */}
-
+        {/* TRAIN PAYMENT */}
         <Route
           path="/train-payment"
           element={<TrainPayment />}
@@ -261,18 +142,40 @@ function AppContent() {
   );
 }
 
-
 // =====================================================
 // MAIN APP
 // =====================================================
 
 function App() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true);
+    };
+
+    const handleOffline = () => {
+      setIsOnline(false);
+    };
+
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
   return (
     <BrowserRouter>
-      <AppContent />
+      {isOnline ? (
+        <AppContent />
+      ) : (
+        <OfflinePage />
+      )}
     </BrowserRouter>
   );
 }
-
 
 export default App;
